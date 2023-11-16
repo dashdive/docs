@@ -2,10 +2,10 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Dashdive",
   "logo": {
-    "dark": "/logo/logo.svg",
-    "light": "/logo/logo.svg"
+    "dark": "/logo/logo.png",
+    "light": "/logo/logo.png"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "colors": {
     "primary": "#006DC2",
     "light": "#ecf5fd",
@@ -23,7 +23,7 @@
   ],
   "topbarCtaButton": {
     "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "url": "https://app.dashdive.com"
   },
   "tabs": [
     {
@@ -35,12 +35,17 @@
     {
       "name": "Documentation",
       "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "url": "https://docs.dashdive.com"
     },
     {
       "name": "Blog",
       "icon": "newspaper",
       "url": "https://www.dashdive.com/blog"
+    },
+    {
+      "name": "Chat with Us",
+      "icon": "phone",
+      "url": "https://calendly.com/micah-wheat/dashdive-chat?month=2023-11"
     }
   ],
   "navigation": [
@@ -49,14 +54,8 @@
       "pages": ["introduction", "quickstart", "development"]
     },
     {
-      "group": "Essentials",
-      "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation"
-      ]
+      "group": "S3",
+      "pages": ["s3/introduction"]
     },
     {
       "group": "API Documentation",
