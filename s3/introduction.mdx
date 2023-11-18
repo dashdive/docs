@@ -2,32 +2,34 @@
 title: 'Introduction'
 description: 'Track your Object Storage'
 ---
+# Tracking Cloud Costs with Dashdive
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+Dasdive's platform is designed to provide comprehensive insights into your cloud storage costs across various providers. 
 
-## Welcome
+## Supported Cloud Providers
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+We support a range of cloud providers, including:
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+- **Amazon S3 (AWS)**: One of the leading cloud service providers, offering robust and scalable cloud storage solutions.
+- **Backblaze B2**: Known for its cost-effective and user-friendly cloud storage services.
+- **Wasabi**: Offers affordable, high-performance cloud storage solutions.
 
-## Authentication
+## Integration for Cost Tracking
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+To enable effective cost tracking, Dashdive requires read access to your cloud storage accounts across these providers. This access allows our platform to gather necessary data and analytics.
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
-```
+### Required Access Details
+
+For integration and accurate cost tracking, we need the following information from your cloud storage accounts:
+
+- **Access Key ID**: This is the unique identifier for your cloud storage account.
+- **Secret Access Key**: The secret key associated with your Access Key ID. It's crucial for secure access and should be kept confidential.
+- **Endpoint**: The specific service URL of your cloud storage, which varies based on the provider.
+
+### Security Assurance
+
+Your security is our priority. Dashdive uses these credentials exclusively for authorized and secure data retrieval. We ensure that all credentials are encrypted and stored securely, maintaining the highest level of confidentiality and integrity.
+
+---
+
+By connecting your cloud storage accounts to Dashdive, you gain valuable insights into your storage usage and costs, helping you optimize your cloud investments. For further details on setting up your account and starting with cost tracking, please refer to our setup guide.

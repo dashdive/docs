@@ -1,86 +1,68 @@
 ---
 title: 'Quickstart'
-description: 'Start tracking your cloud costs'
+description: 'Start tracking your cloud costs with Dashdive'
 ---
 
-## Setup your development
+## Set Up Your Dashdive Environment
 
-Learn how to update your docs locally and and deploy them to the public.
+Begin your journey with Dashdive by setting up your environment to track cloud costs effectively.
 
-### Edit and preview
+### Initial Setup and Preview
 
 <AccordionGroup>
-  <Accordion icon="github" title="Clone your docs locally">
-    During the onboarding process, we created a repository on your Github with
-    your docs content. You can find this repository on our
-    [dashboard](https://dashboard.mintlify.com). To clone the repository
-    locally, follow these
-    [instructions](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository)
-    in your terminal.
+  <Accordion icon="cloud" title="Create Your Dashdive Account">
+    Start by setting up your account at [app.dashdive.com](https://app.dashdive.com). This will be your portal for managing and viewing your cloud cost data.
   </Accordion>
-  <Accordion icon="rectangle-terminal" title="Preview changes">
-    Previewing helps you make sure your changes look as intended. We built a
-    command line interface to render these changes locally. 1. Install the
-    [Mintlify CLI](https://www.npmjs.com/package/mintlify) to preview the
-    documentation changes locally with this command: ``` npm i -g mintlify ```
-    2. Run the following command at the root of your documentation (where
-    `mint.json` is): ``` mintlify dev ```
+  <Accordion icon="key" title="Obtain Cloud Provider Credentials">
+    To integrate Dashdive with your cloud accounts (AWS, Backblaze, Wasabi), you'll need to obtain your Access Key ID and Secret Access Key from each provider. This allows Dashdive to securely access and analyze your usage data.
   </Accordion>
 </AccordionGroup>
 
-### Deploy your changes
+### Integrate and Deploy
 
 <AccordionGroup>
-
-<Accordion icon="message-bot" title="Install our Github app">
-  Our Github app automatically deploys your changes to your docs site, so you
-  don't need to manage deployments yourself. You can find the link to install on
-  your [dashboard](https://dashboard.mintlify.com). Once the bot has been
-  successfully installed, there should be a check mark next to the commit hash
-  of the repo.
+<Accordion icon="sync" title="Connect Your Cloud Accounts">
+  Link your cloud storage accounts to Dashdive through the [Dashdive Dashboard](https://app.dashdive.com/). Here, you can enter the credentials you've obtained from your cloud providers.
 </Accordion>
-<Accordion icon="rocket" title="Push your changes">
-  [Commit and push your changes to
-  Git](https://docs.github.com/en/get-started/using-git/pushing-commits-to-a-remote-repository#about-git-push)
-  for your changes to update in your docs site. If you push and don't see that
-  the Github app successfully deployed your changes, you can also manually
-  update your docs through our [dashboard](https://dashboard.mintlify.com).
+<Accordion icon="analytics" title="Start Tracking Costs">
+  Once your accounts are connected, Dashdive will begin tracking and analyzing your cloud costs. You can view and manage these insights directly from your Dashdive dashboard.
 </Accordion>
-
 </AccordionGroup>
 
-## Update your docs
+## Enhance Your Dashdive Experience
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+Leverage the full potential of Dashdive by integrating additional features and customizations.
 
 <CardGroup>
 
-<Card title="Style Your Docs" icon="paintbrush" href="/settings/global">
-  Add flair to your docs with personalized branding.
+<Card title="Configure Events" icon="hammer" href="/settings/notifications">
+  Set up custom alerts for cost thresholds and unusual activities.
 </Card>
 
 <Card
-  title="Add API Endpoints"
-  icon="square-code"
-  href="/api-playground/configuration"
+  title="API Integration"
+  icon="link"
+  href="/api-integration"
 >
-  Implement your OpenAPI spec and enable API user interaction.
+  Utilize Dashdive’s APIs to tailor data collection and analysis to your specific needs.
+</Card>
+
+{/* <Card
+  title="Cost Optimization Tips"
+  icon="bulb"
+  href="/cost-optimization"
+>
+  Access strategies and best practices for optimizing your cloud costs.
 </Card>
 
 <Card
-  title="Integrate Analytics"
-  icon="chart-mixed"
-  href="/analytics/supported-integrations"
+  title="Support and Community"
+  icon="users"
+  href="/support/community"
 >
-  Draw insights from user interactions with your documentation.
-</Card>
-
-<Card
-  title="Host on a Custom Domain"
-  icon="browser"
-  href="/settings/custom-domain/subdomain"
->
-  Keep your docs on your own website's subdomain.
-</Card>
+  Join the Dashdive community and get support from experts and fellow users.
+</Card> */}
 
 </CardGroup>
+
+Your journey with Dashdive doesn’t stop here. Explore our full suite of tools and resources to gain deeper insights and control over your cloud costs.

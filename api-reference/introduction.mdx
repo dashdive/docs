@@ -1,33 +1,42 @@
 ---
 title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+description: 'Exploring Dashdive’s Self-Serve APIs for Cloud Data Management'
 ---
 
 <Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
+  This documentation is intended for users who are implementing self-serve API integrations. If you're utilizing Dashdive's automated agent for data collection, refer to the relevant sections of our documentation.
 </Note>
 
-## Welcome
+## Welcome to Dashdive’s Data Collection Solutions
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+At Dashdive, we understand the importance of flexibility and control in managing cloud data. To meet diverse needs, we offer two distinct methods for data collection:
+
+1. **Automated Agent**: For those seeking a hassle-free, automated solution, our agent seamlessly integrates with your cloud storage, providing efficient and continuous data collection.
+   
+2. **Self-Serve APIs**: For users who prefer direct control or need to customize data collection, our self-serve APIs offer the flexibility and granularity needed for specific data requirements.
+
+This documentation focuses on our Self-Serve APIs, providing you with the tools and knowledge to integrate these APIs into your cloud management workflow.
+
+## Getting Started with Self-Serve APIs
+
+Before diving into the API details, ensure you're familiar with the basic concepts and setup requirements:
+
+- Review the [API Setup Guide](/s3/introduction) for initial configuration steps.
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="Dashdive API Endpoints"
+  icon="cloud"
+  href="https://staging.ingest.dashdive.com/openapi.json"
 >
-  View the OpenAPI specification file
+  Access the complete OpenAPI specification
 </Card>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+To ensure secure access to our APIs, authentication is mandatory for all endpoints. Use your Dashdive API key as follows:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+"header": {
+  "X-API-Key": "<YOUR_DASHDIVE_API_KEY>"
+}
 ```

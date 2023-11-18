@@ -1,5 +1,29 @@
 ---
-title: 'Object storage event (S3)'
+title: 'S3'
 openapi: 'POST /s3'
 ---
+### Request Body
 
+The request body must be in JSON format and contain details of the S3 event.
+
+#### Schema: S3Event
+
+- `action`: string - The type of action (e.g., ListBuckets, DeleteBucket, etc.)
+- `timestamp`: string (date-time) - Time when the event occurred
+- `provider`: string - The cloud provider (aws, backblaze, wasabi)
+- `customerId`: string (Optional) - ID of the customer
+- ...
+
+### Responses
+
+#### 200 OK
+
+Event processed successfully. Returns a message confirming the successful processing.
+
+#### 400 Bad Request
+
+Invalid event data. The request body does not match the schema requirements.
+
+#### 500 Internal Server Error
+
+Server error. Indicates a server-side issue in handling the request.
