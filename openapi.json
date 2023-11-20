@@ -832,7 +832,7 @@
               "partNumber": {
                 "type": "integer",
                 "minimum": 0,
-                "exclusiveMinimum": 0
+                "exclusiveMinimum": true
               },
               "bucket": { "type": "string" },
               "timestamp": { "type": "string", "format": "date-time" },
@@ -865,7 +865,7 @@
               "partNumber": {
                 "type": "integer",
                 "minimum": 0,
-                "exclusiveMinimum": 0
+                "exclusiveMinimum": true
               },
               "copySource": {
                 "type": "object",

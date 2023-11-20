@@ -1,6 +1,7 @@
 {
 	"devDependencies": {
 		"@mintlify/scraping": "^3.0.63",
+		"@synx-ai/oas3-mdx": "^0.4.7",
 		"mintlify": "^4.0.54"
 	}
 }

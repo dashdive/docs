@@ -2,28 +2,63 @@
 title: 'S3'
 openapi: 'POST /s3'
 ---
-### Request Body
 
-The request body must be in JSON format and contain details of the S3 event.
+```
+POST /s3
+```
 
-#### Schema: S3Event
+**S3 Event Notification**: This endpoint receives notifications for events happening in an S3 bucket, like file uploads.
 
-- `action`: string - The type of action (e.g., ListBuckets, DeleteBucket, etc.)
-- `timestamp`: string (date-time) - Time when the event occurred
-- `provider`: string - The cloud provider (aws, backblaze, wasabi)
-- `customerId`: string (Optional) - ID of the customer
-- ...
 
-### Responses
+## Request Body
 
-#### 200 OK
+| Headers      |                  |
+| ------------ | ---------------- |
+| content-type | application/json |
 
-Event processed successfully. Returns a message confirming the successful processing.
+```json title="Example request"
+{
+  "action": "ListBuckets",
+  "timestamp": "2019-08-24T14:15:22Z",
+  "provider": "aws",
+  "customerId": "string",
+  "featureId": "string",
+  "clientType": "string",
+  "clientId": "string"
+}
+```
 
-#### 400 Bad Request
+## Code Snippets
 
-Invalid event data. The request body does not match the schema requirements.
+```shell title="Shell + Curl"
+curl --request POST \
+  --url http://ingest.dashdive.com/s3 \
+  --header 'content-type: application/json' \
+  --data '{"action":"ListBuckets","timestamp":"2019-08-24T14:15:22Z","provider":"aws","customerId":"string","featureId":"string","clientType":"string","clientId":"string"}'
+```
 
-#### 500 Internal Server Error
+## Responses
 
-Server error. Indicates a server-side issue in handling the request.
+### 200
+
+Event processed successfully
+
+| Headers      |                  |
+| ------------ | ---------------- |
+| content-type | application/json |
+
+**Example `response` for `application/json`**
+
+```json
+{
+  "message": "string"
+}
+```
+
+### 400
+
+Invalid event data
+
+### 500
+
+Server error
