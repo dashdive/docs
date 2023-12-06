@@ -5,6 +5,16 @@
     "dark": "/logo/logo.png",
     "light": "/logo/logo.png"
   },
+  "api": {
+    "baseUrl": "https://ingest.dashdive.com",
+    "auth": {
+      "method": "key",
+      "name": "X-API-Key"
+    },
+    "playground": {
+      "mode": "show"
+    }
+  },
   "openapi": ["openapi.json"],
   "favicon": "/favicon.png",
   "colors": {
@@ -52,19 +62,19 @@
   "navigation": [
     {
       "group": "Get Started",
-      "pages": ["introduction", "quickstart", "how-dashdive-works", "events"]
+      "pages": ["introduction", "how-dashdive-works", "quickstart", "events"]
     },
     {
       "group": "S3",
-      "pages": ["s3/introduction"]
+      "pages": ["s3/overview"]
     },
     {
       "group": "API Documentation",
       "pages": ["api-reference/introduction"]
     },
     {
-      "group": "Endpoint Examples",
-      "pages": ["api-reference/endpoint/post"]
+      "group": "Endpoint",
+      "pages": ["api-reference/endpoint/s3"]
     }
   ],
   "footerSocials": {

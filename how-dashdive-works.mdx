@@ -2,10 +2,7 @@
 title: How Dashdive works
 description: 'A breakdown down of how Dashdive works under the hood'
 ---
-
-The following page goes over how Dashdive is able to ingest and process events on the order of hundreds of thousands per second (spoiler alert it's because of kafka). In addition, this will show Dashdive deploys its services to our K8 cluster.
-
-In its simplest form, the Dashdive cloud cost monitoring system is a collection of tools and services that track cloud resource usage as it occurs, analyze the data for cost attribution, and then store this information for detailed usage analysis and cost. This document provides an overview of how Dashdive's cloud cost monitoring works, as well as some important considerations to keep in mind when integrating and utilizing Dashdive for cloud cost analysis.
+In its simplest form, Dashdive is a collection of tools and services that track cloud resource usage as it occurs, analyze the data for cost attribution, and then retrieves this information for detailed usage and cost analysis. This page provides an overview of how Dashdive's cloud cost monitoring works, as well as some important considerations to keep in mind when integrating and utilizing Dashdive for cloud cost analysis.
 
 ## Architecture Overview
 
@@ -23,12 +20,21 @@ In its simplest form, the Dashdive cloud cost monitoring system is a collection 
 ### Key
 
 - **Ingest Service**: Validates and checks cloud events before sending them to be stored
-- **Analytics Service**: service responsible for generate analytics from cloud usage events
-- **Kafka**: stream-processing service, for batch inserts of cloud events into clickhouse
-- **Clickhouse**: event store and primary OLAP
-- **Postgres**: data store for non-event related data
-- **Redis**: Acts mainly as cache a for API keys
+- **Analytics Service**: Service responsible for generating analytics from cloud usage events
+- **Kafka**: Stream-processing service, mainly for batch inserts of cloud events into Clickhouse
+- **Clickhouse**: Event store and primary OLAP
+- **Postgres**: Stores non-event related data
+- **Redis**: Acts mainly as a cache for API keys
 
-## How can Dashdive handle so many events?
+## How does Dashdive handle so many events?
 
-## How is data stored?
+Realiably tracking and aggregating cloud events at an enterprise scale can be difficult to say the least. Dashdive is able to scale to high throughput work loads because of our reliance on Kafka and Clickhouse, two time tested technologies.
+
+Kafka's high-throughput and distributed architecture allow for scalable, reliable handling of large volumes of cloud usage events. This ensures continuous, real-time event processing, crucial for maintaining the speed and accuracy of Dashdive realtime cost analytics.
+
+Clickhouse column oriented datastore powers Dashdive's fast, realtime cost analytics, via a schema tailored for aggregatation queries. In conjunction with a custom manual aggregatation service, Dashdive can support realtime analytics queries over billions of usage events.  
+
+
+{/* ## How is data stored?
+
+Dashdive employs data storage strategy, leveraging the strengths of various technologies. Clickhouse, our primary event store, excels in handling large volumes of event data, thanks to its column-oriented architecture that ensures fast read and write operations for real-time analytics. For structured, non-event data such as user information and settings, we utilize Postgres due to its robustness and support for complex queries. Additionally, Redis serves as an efficient caching layer, primarily for frequently accessed data like API keys, thereby enhancing the speed and efficiency of data retrieval across the system. */}

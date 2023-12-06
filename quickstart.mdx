@@ -5,30 +5,33 @@ description: 'Start tracking your cloud costs with Dashdive'
 
 ## Set Up Your Dashdive Environment
 
-Begin your journey with Dashdive by setting up your environment to track cloud costs effectively.
+Begin your journey with Dashdive by setting up your environment to track cloud costs effectively. 
 
 ### Initial Setup and Preview
 
 <AccordionGroup>
   <Accordion icon="cloud" title="Create Your Dashdive Account">
-    Start by setting up your account at [app.dashdive.com](https://app.dashdive.com). This will be your portal for managing and viewing your cloud cost data.
+    Reach out to our team via. [team@dashdive.com](mailto:team@dashdive.com?subject=Create%20Dashdive%20Account). We will provision your organization in our system and walk you through the onboarding process.
   </Accordion>
   <Accordion icon="key" title="Obtain Cloud Provider Credentials">
-    To integrate Dashdive with your cloud accounts (AWS, Backblaze, Wasabi), you'll need to obtain your Access Key ID and Secret Access Key from each provider. This allows Dashdive to securely access and analyze your usage data.
+    Dashdive needs to initialize with your cloud accounts. To start this process, you'll need to obtain cloud credentials from each provider you would like to track. This will allow Dashdive to correct for any missed events and adjust for discrepencies. Be sure to check that the cloud credentials have read access to your cloud resource.
   </Accordion>
 </AccordionGroup>
 
 ### Integrate and Deploy
 
 <AccordionGroup>
-<Accordion icon="cloud" title="Connect Your Cloud Accounts">
-  Link your cloud storage accounts to Dashdive through the [Dashdive Dashboard](https://app.dashdive.com/). Here, you can enter the credentials you've obtained from your cloud providers.
-</Accordion>
 <Accordion icon="database" title="Emit Cloud Events to Dashdive">
-  
+  Last step to start tracking your cloud costs with Dashdive is emitting cloud events to Dashdive. There are multiple ways to report events to Dashdive:
+
+  - Automated Agent
+  - Self-Service API
+  - Dashdive SDK's
+
+  For more info see [Event Ingestion](/events)
 </Accordion>
 <Accordion icon="dollar-sign" title="Start Tracking Costs">
-  Once your accounts are connected, Dashdive will begin tracking and analyzing your cloud costs. You can view and manage these insights directly from your Dashdive dashboard.
+  Once your cloud accounts are connected and your cloud is emitting usage events, Dashdive will begin tracking and analyzing your cloud costs. You can view and manage these insights directly from your Dashdive dashboard.
 </Accordion>
 </AccordionGroup>
 
