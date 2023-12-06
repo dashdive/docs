@@ -66,7 +66,7 @@
     },
     {
       "group": "S3",
-      "pages": ["s3/overview"]
+      "pages": ["s3/overview", "s3/integration"]
     },
     {
       "group": "API Documentation",

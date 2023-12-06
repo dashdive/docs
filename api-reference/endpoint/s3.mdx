@@ -1,14 +1,150 @@
 ---
 title: 'S3'
-openapi: 'POST /s3'
+description: "Object Storage Event"
 ---
 
-**S3 Event Notification**: This endpoint receives notifications for events happening in an S3 bucket, like file uploads.
+This endpoint receives object storage events, like a file upload to S3, and logs it.
 
+| Headers      |                  |
+| ------------ | ---------------- |
+| Content-Type | application/json |
+| X-API-Key    |  \<x-api-key\>   |
+
+<RequestExample>
+
+```shell cURL
+curl --request POST \
+  --url https://ingest.dashdive.com/s3 \
+  --header 'Content-Type: application/json' \
+  --header 'X-API-Key: <x-api-key>' \
+  --data '{
+  "action": "ListBuckets",
+  "timestamp": "yyyy-MM-dd HH:mm:ss",
+  "provider": "aws",
+  "customerId": "string",
+  "featureId": "string",
+  "clientType": "string",
+  "clientId": "string"
+}'
+```
+
+```python Python
+import requests
+
+url = "https://ingest.dashdive.com/s3"
+
+payload = {
+    "action": "ListBuckets",
+    "timestamp": "yyyy-MM-dd HH:mm:ss",
+    "provider": "aws",
+    "customerId": "string",
+    "featureId": "string",
+    "clientType": "string",
+    "clientId": "string"
+}
+headers = {
+    "X-API-Key": "<x-api-key>",
+    "Content-Type": "application/json"
+}
+
+response = requests.request("POST", url, json=payload, headers=headers)
+
+print(response.text)
+```
+
+```javascript JavaScript
+const options = {
+  method: 'POST',
+  headers: {'X-API-Key': '<x-api-key>', 'Content-Type': 'application/json'},
+  body: '{"action":"ListBuckets","timestamp":"yyyy-MM-dd HH:mm:ss","provider":"aws","customerId":"string","featureId":"string","clientType":"string","clientId":"string"}'
+};
+
+fetch('https://ingest.dashdive.com/s3', options)
+  .then(response => response.json())
+  .then(response => console.log(response))
+  .catch(err => console.error(err));
+```
+
+```php php
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, [
+  CURLOPT_URL => "https://ingest.dashdive.com/s3",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => "{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-dd HH:mm:ss\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}",
+  CURLOPT_HTTPHEADER => [
+    "Content-Type: application/json",
+    "X-API-Key: <x-api-key>"
+  ],
+]);
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+```
+
+```go Go
+package main
+
+import (
+	"fmt"
+	"strings"
+	"net/http"
+	"io/ioutil"
+)
+
+func main() {
+
+	url := "https://ingest.dashdive.com/s3"
+
+	payload := strings.NewReader("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-dd HH:mm:ss\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
+
+	req, _ := http.NewRequest("POST", url, payload)
+
+	req.Header.Add("X-API-Key", "<x-api-key>")
+	req.Header.Add("Content-Type", "application/json")
+
+	res, _ := http.DefaultClient.Do(req)
+
+	defer res.Body.Close()
+	body, _ := ioutil.ReadAll(res.Body)
+
+	fmt.Println(res)
+	fmt.Println(string(body))
+}
+```
+
+```java Java
+HttpResponse<String> response = Unirest.post("https://ingest.dashdive.com/s3")
+  .header("X-API-Key", "<x-api-key>")
+  .header("Content-Type", "application/json")
+  .body("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-dd HH:mm:ss\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
+  .asString();
+```
+
+</RequestExample>   
 
 # Body Options
 
-<ResponseField name="ListBuckets" type="1">
+The S3 endpoint takes a POST request with a body of one of the thirty eight different event types 
+
+## List Buckets Event
+
+<ResponseField name="ListBuckets" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'ListBuckets'">
       The type of action, which is 'ListBuckets'.
@@ -34,7 +170,9 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="DeleteBucket" type="2">
+## Delete Bucket Event
+
+<ResponseField name="DeleteBucket" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'DeleteBucket'">
       The type of action, which is 'DeleteBucket'.
@@ -66,7 +204,9 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="HeadBucket" type="3">
+## Simple Per Bucket Event
+
+<ResponseField name="HeadBucket" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'HeadBucket'">
       The type of action, which is 'HeadBucket'.
@@ -95,7 +235,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="CreateBucket" type="4">
+<ResponseField name="CreateBucket" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'CreateBucket'">
       The type of action, which is 'CreateBucket'.
@@ -124,7 +264,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetBucketAcl" type="5">
+<ResponseField name="GetBucketAcl" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetBucketAcl'">
       The type of action, which is 'GetBucketAcl'.
@@ -153,7 +293,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetBucketCors" type="6">
+<ResponseField name="GetBucketCors" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetBucketCors'">
       The type of action, which is 'GetBucketCors'.
@@ -182,7 +322,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetBucketEncryption" type="7">
+<ResponseField name="GetBucketEncryption" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetBucketEncryption'">
       The type of action, which is 'GetBucketEncryption'.
@@ -211,7 +351,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetBucketLocation" type="8">
+<ResponseField name="GetBucketLocation" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetBucketLocation'">
       The type of action, which is 'GetBucketLocation'.
@@ -240,7 +380,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetBucketVersioning" type="9">
+<ResponseField name="GetBucketVersioning" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetBucketVersioning'">
       The type of action, which is 'GetBucketVersioning'.
@@ -269,7 +409,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="PutBucketAcl" type="10">
+<ResponseField name="PutBucketAcl" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'PutBucketAcl'">
       The type of action, which is 'PutBucketAcl'.
@@ -298,7 +438,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="PutBucketCors" type="11">
+<ResponseField name="PutBucketCors" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'PutBucketCors'">
       The type of action, which is 'PutBucketCors'.
@@ -327,7 +467,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="PutBucketEncryption" type="12">
+<ResponseField name="PutBucketEncryption" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'PutBucketEncryption'">
       The type of action, which is 'PutBucketEncryption'.
@@ -356,7 +496,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="DeleteBucketCors" type="13">
+<ResponseField name="DeleteBucketCors" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'DeleteBucketCors'">
       The type of action, which is 'DeleteBucketCors'.
@@ -385,7 +525,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="DeleteBucketEncryption" type="14">
+<ResponseField name="DeleteBucketEncryption" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'DeleteBucketEncryption'">
       The type of action, which is 'DeleteBucketEncryption'.
@@ -414,7 +554,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetObjectLockConfiguration" type="15">
+<ResponseField name="GetObjectLockConfiguration" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetObjectLockConfiguration'">
       The type of action, which is 'GetObjectLockConfiguration'.
@@ -443,7 +583,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="PutObjectLockConfiguration" type="16">
+<ResponseField name="PutObjectLockConfiguration" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'PutObjectLockConfiguration'">
       The type of action, which is 'PutObjectLockConfiguration'.
@@ -472,7 +612,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="ListObjectsV2" type="17">
+<ResponseField name="ListObjectsV2" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'ListObjectsV2'">
       The type of action, which is 'ListObjectsV2'.
@@ -501,7 +641,9 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="HeadObject" type="18">
+## Simple Per Object Event
+
+<ResponseField name="HeadObject" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'HeadObject'">
       The type of action, which is 'HeadObject'.
@@ -533,7 +675,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="ListObjectVersions" type="19">
+<ResponseField name="ListObjectVersions" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'ListObjectVersions'">
       The type of action, which is 'ListObjectVersions'.
@@ -565,7 +707,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetObjectAcl" type="20">
+<ResponseField name="GetObjectAcl" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetObjectAcl'">
       The type of action, which is 'GetObjectAcl'.
@@ -597,7 +739,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="PutObjectAcl" type="21">
+<ResponseField name="PutObjectAcl" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'PutObjectAcl'">
       The type of action, which is 'PutObjectAcl'.
@@ -629,7 +771,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetObjectRetention" type="22">
+<ResponseField name="GetObjectRetention" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetObjectRetention'">
       The type of action, which is 'GetObjectRetention'.
@@ -661,7 +803,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="PutObjectRetention" type="23">
+<ResponseField name="PutObjectRetention" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'PutObjectRetention'">
       The type of action, which is 'PutObjectRetention'.
@@ -693,7 +835,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetObjectLegalHold" type="24">
+<ResponseField name="GetObjectLegalHold" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetObjectLegalHold'">
       The type of action, which is 'GetObjectLegalHold'.
@@ -725,7 +867,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="PutObjectLegalHold" type="25">
+<ResponseField name="PutObjectLegalHold" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'PutObjectLegalHold'">
       The type of action, which is 'PutObjectLegalHold'.
@@ -757,7 +899,9 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="GetObject" type="26">
+## Object CRUD Event
+
+<ResponseField name="GetObject" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'GetObject'">
       The type of action, which is 'GetObject'.
@@ -795,7 +939,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="PutObject" type="27">
+<ResponseField name="PutObject" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'PutObject'">
       The type of action, which is 'PutObject'.
@@ -842,7 +986,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="PostObject" type="28">
+<ResponseField name="PostObject" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'PostObject'">
       The type of action, which is 'PostObject'.
@@ -889,7 +1033,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="CopyObject" type="29">
+<ResponseField name="CopyObject" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'CopyObject'">
       The type of action, which is 'CopyObject'.
@@ -935,7 +1079,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="DeleteObject" type="30">
+<ResponseField name="DeleteObject" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'DeleteObject'">
       The type of action, which is 'DeleteObject'.
@@ -973,7 +1117,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="DeleteObjects" type="31">
+<ResponseField name="DeleteObjects" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'DeleteObjects'">
       The type of action, which is 'DeleteObjects'.
@@ -1013,7 +1157,9 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="CreateMultipartUpload" type="32">
+## Multipart Uploads Event
+
+<ResponseField name="CreateMultipartUpload" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'CreateMultipartUpload'">
       The type of action, which is 'CreateMultipartUpload'.
@@ -1048,7 +1194,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="CompleteMultipartUpload" type="33">
+<ResponseField name="CompleteMultipartUpload" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'CompleteMultipartUpload'">
       The type of action, which is 'CompleteMultipartUpload'.
@@ -1083,7 +1229,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="AbortMultipartUpload" type="34">
+<ResponseField name="AbortMultipartUpload" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'AbortMultipartUpload'">
       The type of action, which is 'AbortMultipartUpload'.
@@ -1115,7 +1261,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="UploadPart" type="35">
+<ResponseField name="UploadPart" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'UploadPart'">
       The type of action, which is 'UploadPart'.
@@ -1153,7 +1299,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="UploadPartCopy" type="36">
+<ResponseField name="UploadPartCopy" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'UploadPartCopy'">
       The type of action, which is 'UploadPartCopy'.
@@ -1202,7 +1348,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="ListParts" type="37">
+<ResponseField name="ListParts" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'ListParts'">
       The type of action, which is 'ListParts'.
@@ -1234,7 +1380,7 @@ openapi: 'POST /s3'
   </Expandable>
 </ResponseField>
 
-<ResponseField name="ListMultipartUploads" type="38">
+<ResponseField name="ListMultipartUploads" type="">
   <Expandable title="Properties">
     <ResponseField name="action" type="'ListMultipartUploads'">
       The type of action, which is 'ListMultipartUploads'.
@@ -1262,58 +1408,3 @@ openapi: 'POST /s3'
     </ResponseField>
   </Expandable>
 </ResponseField>
-
-
-{/* 
-## Request Body
-
-| Headers      |                  |
-| ------------ | ---------------- |
-| content-type | application/json |
-
-```json title="Example request"
-{
-  "action": "ListBuckets",
-  "timestamp": "2019-08-24T14:15:22Z",
-  "provider": "aws",
-  "customerId": "string",
-  "featureId": "string",
-  "clientType": "string",
-  "clientId": "string"
-}
-```
-
-## Code Snippets
-
-```shell title="Shell + Curl"
-curl --request POST \
-  --url http://ingest.dashdive.com/s3 \
-  --header 'content-type: application/json' \
-  --data '{"action":"ListBuckets","timestamp":"2019-08-24T14:15:22Z","provider":"aws","customerId":"string","featureId":"string","clientType":"string","clientId":"string"}'
-```
-
-## Responses
-
-### 200
-
-Event processed successfully
-
-| Headers      |                  |
-| ------------ | ---------------- |
-| content-type | application/json |
-
-**Example `response` for `application/json`**
-
-```json
-{
-  "message": "string"
-}
-```
-
-### 400
-
-Invalid event data
-
-### 500
-
-Server error */}
