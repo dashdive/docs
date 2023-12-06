@@ -138,9 +138,18 @@ HttpResponse<String> response = Unirest.post("https://ingest.dashdive.com/s3")
 
 </RequestExample>   
 
+<ResponseExample>
+```txt 200
+ok
+```
+```json 400
+{ "error": "Validation Error", "details": [] }
+```
+</ResponseExample>
+
 # Body Options
 
-The S3 endpoint takes a POST request with a body of one of the thirty eight different event types 
+The S3 endpoint takes a POST request with a body of one of the thirty eight different event types below
 
 ## List Buckets Event
 
