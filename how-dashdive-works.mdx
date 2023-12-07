@@ -2,7 +2,7 @@
 title: How Dashdive works
 description: 'A breakdown down of how Dashdive works under the hood'
 ---
-In its simplest form, Dashdive is a collection of tools and services that track cloud resource usage as it occurs, analyze the data for cost attribution, and then retrieves this information for detailed usage and cost analysis. This page provides an overview of how Dashdive's cloud cost monitoring works, as well as some important considerations to keep in mind when integrating and utilizing Dashdive for cloud cost analysis.
+Dashdive is a suite of tools and services that logs and attributes cloud usage, calculates resulting costs and displays these data in a real-time business intelligence dashboard. This page describes how we do this.
 
 ## Architecture Overview
 
@@ -17,24 +17,32 @@ In its simplest form, Dashdive is a collection of tools and services that track 
   alt="Architecture Dark"
 />
 
-### Key
+## Key
 
-- **Ingest Service**: Validates and checks cloud events before sending them to be stored
-- **Analytics Service**: Service responsible for generating analytics from cloud usage events
-- **Kafka**: Stream-processing service, mainly for batch inserts of cloud events into Clickhouse
-- **Clickhouse**: Event store and primary OLAP
+- **Ingest Service**: Validates cloud usage data sent to our API before sending them to our backend database
+- **Kafka**: Large-scale stream-processing service, mainly for large batch inserts
 - **Postgres**: Stores non-event related data
-- **Redis**: Acts mainly as a cache for API keys
+- **Redis**: Caches API keys
+- **Clickhouse**: Stores cloud usage event data (primary OLAP)
+- **Analytics Service**: Generating analytics from cloud usage events
+
+## What scale does Dashdive support?
+
+We designed Dashdive to be arbitrarily scalable, because companies operating at scale often need Dashdive the most. We have tested it at scale, handling upwards of 100k events per second.
 
 ## How does Dashdive handle so many events?
+
+Dashdive leverages best-in-class event streaming and columnar database technologies ([Kafka](https://kafka.apache.org/) and [Clickhouse](https://clickhouse.com/docs/en/faq/general/why-clickhouse-is-so-fast)) to reliably meet our customers’ scale demands.
+
+{/* ## How does Dashdive handle so many events?
 
 Realiably tracking and aggregating cloud events at an enterprise scale can be difficult to say the least. Dashdive is able to scale to high throughput work loads because of our reliance on Kafka and Clickhouse, two time tested technologies.
 
 Kafka's high-throughput and distributed architecture allow for scalable, reliable handling of large volumes of cloud usage events. This ensures continuous, real-time event processing, crucial for maintaining the speed and accuracy of Dashdive realtime cost analytics.
 
-Clickhouse column oriented datastore powers Dashdive's fast, realtime cost analytics, via a schema tailored for aggregatation queries. In conjunction with a custom manual aggregatation service, Dashdive can support realtime analytics queries over billions of usage events.  
+Clickhouse column oriented datastore powers Dashdive's fast, realtime cost analytics, via a schema tailored for aggregatation queries. In conjunction with a custom manual aggregatation service, Dashdive can support realtime analytics queries over billions of usage events.
 
+## How is data stored?
 
-{/* ## How is data stored?
-
-Dashdive employs data storage strategy, leveraging the strengths of various technologies. Clickhouse, our primary event store, excels in handling large volumes of event data, thanks to its column-oriented architecture that ensures fast read and write operations for real-time analytics. For structured, non-event data such as user information and settings, we utilize Postgres due to its robustness and support for complex queries. Additionally, Redis serves as an efficient caching layer, primarily for frequently accessed data like API keys, thereby enhancing the speed and efficiency of data retrieval across the system. */}
+Dashdive employs data storage strategy, leveraging the strengths of various technologies. Clickhouse, our primary event store, excels in handling large volumes of event data, thanks to its column-oriented architecture that ensures fast read and write operations for real-time analytics. For structured, non-event data such as user information and settings, we utilize Postgres due to its robustness and support for complex queries. Additionally, Redis serves as an efficient caching layer, primarily for frequently accessed data like API keys, thereby enhancing the speed and efficiency of data retrieval across the system.
+*/}

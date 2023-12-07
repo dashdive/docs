@@ -61,14 +61,8 @@
   ],
   "navigation": [
     {
-      "group": "Get Started",
-      "pages": [
-        "introduction",
-        "how-dashdive-works",
-        "quickstart",
-        "events",
-        "s3"
-      ]
+      "group": "Documentation",
+      "pages": ["introduction", "how-dashdive-works", "events", "s3"]
     },
     {
       "group": "API Documentation",

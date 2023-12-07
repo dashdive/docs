@@ -1,9 +1,11 @@
 ---
-title: Introduction
+title: Get Started
 description: 'Breakdown your cloud costs by feature, customer, provider, etc...'
 ---
 
-Dashdive is a cloud cost observability tool that specializes in breaking down cloud costs by feature, team, and customer. It offers a unique approach to cloud cost management by attributing costs to specific features, products, teams, and customers, particularly for services like AWS, GCP, Azure, and others
+## Introduction
+
+Dashdive breaks down cloud costs by feature, team, and customer, among other attributes of interest. We currently support S3-compatible object storage providers, including AWS, Backblaze and Wasabi. If there is another provider or service you’d like to see supported, please [let us know](mailto:team@dashdive.com).
 
 <img
   className="block dark:hidden w-full p-4"
@@ -16,58 +18,23 @@ Dashdive is a cloud cost observability tool that specializes in breaking down cl
   alt="Hero Dark"
 />
 
-## Setting up
+This page explains how to get started using Dashdive. For information about how Dashdive works, see this [page](/how-dashdive-works).
 
-The first step to tracking your cloud costs.
 
-<CardGroup cols={2}>
-  <Card
-    title="Setup your account"
-    icon="pen-to-square"
-    href="/quickstart"
-  >
-    Create your account, grant Dashdive access to your cloud
-  </Card>
-  <Card
-    title="Configure your events"
-    icon="hammer"
-    href="/events"
-  >
-    Stream events from your cloud to Dashdive's API 
-  </Card>
-</CardGroup>
+## Creating your account
+Reach out to us at [team@dashdive.com](mailto:team@dashdive.com) to schedule your concierge onboarding. Before this meeting, please track down the following read-only cloud provider credentials:
+- Access Key ID
+- Secret Access Key
+- Endpoint: The specific service URL of your cloud storage, which varies based on the provider.
 
-{/* ## Make it yours
+We use these credentials to verify completeness of the data we receive and identify missed events.
 
-Update your docs to your brand and add valuable content for the best user conversion.
+## Sending your cloud usage data to our API
+Dashdive requires that you send the cloud usage events that you’d like to track to our self-serve API. For information about how to do that, see our [API Reference](/api-reference/introduction).
 
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
-  </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
-  </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/components/accordion"
-  >
-    Build interactive features and designs to guide your users
-  </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/showcase"
-  >
-    Check out our showcase of our favorite documentation
-  </Card>
-</CardGroup> */}
+## Visualizing your cloud usage and costs in our dashboard
+Log in to your account at [app.dashdive.com](https://app.dashdive.com/) to visualize and export your cloud usage and cost data.
+
+## A note on security
+Your security is our top priority. Dashdive uses your cloud credentials exclusively for authorized and secure data retrieval. We ensure that all credentials are encrypted and stored securely, using industry best practices to ensure complete confidentiality of your data.
+
