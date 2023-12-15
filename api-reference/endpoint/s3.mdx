@@ -1,6 +1,7 @@
 ---
 title: 'S3'
 description: "Object Storage Event"
+openapi: "POST /s3"
 ---
 
 This endpoint receives object storage events, like a file upload to S3, and logs it.
@@ -164,16 +165,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -186,7 +187,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="action" type="'DeleteBucket'">
       The type of action, which is 'DeleteBucket'.
     </ResponseField>
-    <ResponseField name="force" type="boolean">
+    <ResponseField name="force" type="boolean (optional)">
       A boolean indicating whether the deletion should be forced.
     </ResponseField>
     <ResponseField name="bucket" type="string">
@@ -198,16 +199,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -229,16 +230,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -258,16 +259,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -287,16 +288,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -316,16 +317,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -345,16 +346,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -374,16 +375,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -403,16 +404,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -432,16 +433,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -461,16 +462,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -490,16 +491,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -519,16 +520,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -548,16 +549,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -577,16 +578,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -606,16 +607,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -635,16 +636,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -669,16 +670,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -701,16 +702,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -733,16 +734,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -765,16 +766,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -797,16 +798,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -829,16 +830,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -861,16 +862,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -893,16 +894,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -918,7 +919,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="bytes" type="integer">
       The size of the object in bytes.
     </ResponseField>
-    <ResponseField name="versionId" type="string">
+    <ResponseField name="versionId" type="string (optional)">
       The version ID of the object being retrieved.
     </ResponseField>
     <ResponseField name="objectKey" type="string">
@@ -933,16 +934,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -956,17 +957,14 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="bytes" type="integer">
       The size of the object in bytes.
     </ResponseField>
-    <ResponseField name="versionId" type="string">
+    <ResponseField name="versionId" type="string (optional)">
       The version ID of the object being uploaded.
     </ResponseField>
-    <ResponseField name="objectCategory" type="string">
+    <ResponseField name="objectCategory" type="string (optional)">
       The category of the object.
     </ResponseField>
-    <ResponseField name="fileType" type="string">
+    <ResponseField name="fileType" type="string (optional)">
       The file type of the object.
-    </ResponseField>
-    <ResponseField name="isSynthetic" type="boolean">
-      Indicates whether the object is synthetic.
     </ResponseField>
     <ResponseField name="objectKey" type="string">
       The key of the object being uploaded.
@@ -980,16 +978,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -1003,17 +1001,14 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="bytes" type="integer">
       The size of the object in bytes.
     </ResponseField>
-    <ResponseField name="versionId" type="string">
+    <ResponseField name="versionId" type="string (optional)">
       The version ID of the object being posted.
     </ResponseField>
-    <ResponseField name="objectCategory" type="string">
+    <ResponseField name="objectCategory" type="string (optional)">
       The category of the object.
     </ResponseField>
-    <ResponseField name="fileType" type="string">
+    <ResponseField name="fileType" type="string (optional)">
       The file type of the object.
-    </ResponseField>
-    <ResponseField name="isSynthetic" type="boolean">
-      Indicates whether the object is synthetic.
     </ResponseField>
     <ResponseField name="objectKey" type="string">
       The key of the object being posted.
@@ -1027,16 +1022,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -1047,7 +1042,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="action" type="'CopyObject'">
       The type of action, which is 'CopyObject'.
     </ResponseField>
-    <ResponseField name="versionId" type="string">
+    <ResponseField name="versionId" type="string (optional)">
       The version ID of the object being copied.
     </ResponseField>
     <Expandable title="copySource">
@@ -1057,7 +1052,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       <ResponseField name="objectKey" type="string">
         The key of the source object being copied.
       </ResponseField>
-      <ResponseField name="versionId" type="string">
+      <ResponseField name="versionId" type="string (optional)">
         The version ID of the source object being copied.
       </ResponseField>
     </Expandable>
@@ -1073,16 +1068,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -1093,10 +1088,10 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="action" type="'DeleteObject'">
       The type of action, which is 'DeleteObject'.
     </ResponseField>
-    <ResponseField name="versionId" type="string">
+    <ResponseField name="versionId" type="string (optional)">
       The version ID of the object being deleted, if applicable.
     </ResponseField>
-    <ResponseField name="isDeleteMarker" type="boolean">
+    <ResponseField name="isDeleteMarker" type="boolean (optional)">
       Indicates whether the deletion is a delete marker.
     </ResponseField>
     <ResponseField name="objectKey" type="string">
@@ -1111,16 +1106,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -1135,10 +1130,10 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       <ResponseField name="objectKey" type="string">
         The key of the object being deleted.
       </ResponseField>
-      <ResponseField name="versionId" type="string">
+      <ResponseField name="versionId" type="string (optional)">
         The version ID of the object being deleted, if applicable.
       </ResponseField>
-      <ResponseField name="isDeleteMarker" type="boolean">
+      <ResponseField name="isDeleteMarker" type="boolean (optional)">
         Indicates whether the deletion is a delete marker.
       </ResponseField>
     </Expandable>
@@ -1151,16 +1146,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the event.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the event.
     </ResponseField>
   </Expandable>
@@ -1188,16 +1183,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the multipart upload.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the multipart upload.
     </ResponseField>
   </Expandable>
@@ -1211,7 +1206,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="uploadId" type="string">
       The unique identifier for the multipart upload being completed.
     </ResponseField>
-    <ResponseField name="versionId" type="string">
+    <ResponseField name="versionId" type="string (optional)">
       The version ID of the object being uploaded, if versioning is enabled.
     </ResponseField>
     <ResponseField name="bucket" type="string">
@@ -1223,16 +1218,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the event. 
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature involved in the event.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that completed the multipart upload.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that completed the multipart upload.
     </ResponseField>
   </Expandable>
@@ -1243,7 +1238,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="action" type="'AbortMultipartUpload'">
       The type of action, which is 'AbortMultipartUpload'.
     </ResponseField>
-    <ResponseField name="uploadId" type="string">
+    <ResponseField name="uploadId" type="string ">
       The unique identifier for the multipart upload being aborted.
     </ResponseField>
     <ResponseField name="bucket" type="string">
@@ -1255,16 +1250,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer involved in the multipart upload.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the multipart upload.
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature related to the multipart upload.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the abort action.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the abort action.
     </ResponseField>
   </Expandable>
@@ -1293,16 +1288,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer involved in the upload.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the upload.
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature related to the upload.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the upload part.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the upload part.
     </ResponseField>
   </Expandable>
@@ -1329,7 +1324,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       <ResponseField name="objectKey" type="string">
         The key of the source object being copied.
       </ResponseField>
-      <ResponseField name="versionId" type="string">
+      <ResponseField name="versionId" type="string (optional)">
         The version ID of the source object, if applicable.
       </ResponseField>
     </Expandable>
@@ -1342,16 +1337,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer involved in the upload.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the upload.
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature related to the upload.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the upload part copy.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the upload part copy.
     </ResponseField>
   </Expandable>
@@ -1374,16 +1369,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer involved in the multipart upload.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering the listing.
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature related to the multipart upload.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the list parts action.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the list parts action.
     </ResponseField>
   </Expandable>
@@ -1403,16 +1398,16 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
     </ResponseField>
-    <ResponseField name="customerId" type="string">
-      The unique identifier of the customer involved in the multipart uploads.
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the end customer responsible for triggering listing of the multipart uploads.
     </ResponseField>
-    <ResponseField name="featureId" type="string">
+    <ResponseField name="featureId" type="string (optional)">
       Identifier for the specific feature related to the multipart uploads.
     </ResponseField>
-    <ResponseField name="clientType" type="string">
+    <ResponseField name="clientType" type="string (optional)">
       The type of client that initiated the list multipart uploads action.
     </ResponseField>
-    <ResponseField name="clientId" type="string">
+    <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client that initiated the list multipart uploads action.
     </ResponseField>
   </Expandable>
