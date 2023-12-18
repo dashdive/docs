@@ -19,7 +19,7 @@ curl --request POST \
   --header 'X-API-Key: <x-api-key>' \
   --data '{
   "action": "ListBuckets",
-  "timestamp": "yyyy-MM-dd HH:mm:ss",
+  "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
   "provider": "aws",
   "customerId": "string",
   "featureId": "string",
@@ -35,7 +35,7 @@ url = "https://ingest.dashdive.com/s3"
 
 payload = {
     "action": "ListBuckets",
-    "timestamp": "yyyy-MM-dd HH:mm:ss",
+    "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
     "provider": "aws",
     "customerId": "string",
     "featureId": "string",
@@ -56,7 +56,7 @@ print(response.text)
 const options = {
   method: 'POST',
   headers: {'X-API-Key': '<x-api-key>', 'Content-Type': 'application/json'},
-  body: '{"action":"ListBuckets","timestamp":"yyyy-MM-dd HH:mm:ss","provider":"aws","customerId":"string","featureId":"string","clientType":"string","clientId":"string"}'
+  body: '{"action":"ListBuckets","timestamp":"yyyy-MM-ddTHH:mm:ssZ","provider":"aws","customerId":"string","featureId":"string","clientType":"string","clientId":"string"}'
 };
 
 fetch('https://ingest.dashdive.com/s3', options)
@@ -78,7 +78,7 @@ curl_setopt_array($curl, [
   CURLOPT_TIMEOUT => 30,
   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
   CURLOPT_CUSTOMREQUEST => "POST",
-  CURLOPT_POSTFIELDS => "{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-dd HH:mm:ss\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}",
+  CURLOPT_POSTFIELDS => "{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-ddTHH:mm:ssZ\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}",
   CURLOPT_HTTPHEADER => [
     "Content-Type: application/json",
     "X-API-Key: <x-api-key>"
@@ -111,7 +111,7 @@ func main() {
 
 	url := "https://ingest.dashdive.com/s3"
 
-	payload := strings.NewReader("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-dd HH:mm:ss\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
+	payload := strings.NewReader("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-ddTHH:mm:ssZ\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
 
 	req, _ := http.NewRequest("POST", url, payload)
 
@@ -132,7 +132,7 @@ func main() {
 HttpResponse<String> response = Unirest.post("https://ingest.dashdive.com/s3")
   .header("X-API-Key", "<x-api-key>")
   .header("Content-Type", "application/json")
-  .body("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-dd HH:mm:ss\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
+  .body("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-ddTHH:mm:ssZ\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
   .asString();
 ```
 
@@ -159,7 +159,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The type of action, which is 'ListBuckets'.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -193,7 +194,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket to be deleted.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -224,7 +226,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket to be accessed.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -253,7 +256,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket to be created.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -282,7 +286,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the ACL (Access Control List) is being retrieved.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -311,7 +316,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the CORS (Cross-Origin Resource Sharing) configuration is being retrieved.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -340,7 +346,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the encryption settings are being retrieved.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -369,7 +376,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the location information is being retrieved.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -398,7 +406,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the versioning information is being retrieved.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -427,7 +436,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the ACL (Access Control List) is being set.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -456,7 +466,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the CORS (Cross-Origin Resource Sharing) settings are being set.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -485,7 +496,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the encryption settings are being set.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -514,7 +526,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the CORS (Cross-Origin Resource Sharing) settings are being deleted.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -543,7 +556,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the encryption settings are being deleted.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -572,7 +586,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the object lock configuration is being retrieved.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -601,7 +616,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which the object lock configuration is being set.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -630,7 +646,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket for which objects are being listed.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -664,7 +681,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket in which the object is stored.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -696,7 +714,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket containing the object.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -728,7 +747,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket containing the object.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -760,7 +780,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket containing the object.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -792,7 +813,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket containing the object.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -824,7 +846,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket containing the object.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -856,7 +879,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket containing the object.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -888,7 +912,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket containing the object.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -928,7 +953,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket containing the object.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -972,7 +998,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket into which the object is being uploaded.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1016,7 +1043,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket into which the object is being posted.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1062,7 +1090,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the destination bucket.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1100,7 +1129,8 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket containing the object being deleted.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
+
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1140,7 +1170,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket from which objects are being deleted.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1177,7 +1207,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket to which the object is being uploaded.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the multipart upload was initiated, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1212,7 +1242,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket to which the multipart upload was made.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the multipart upload was completed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1244,7 +1274,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket where the multipart upload was taking place.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the multipart upload was aborted, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1282,7 +1312,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket where the part is being uploaded.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the part upload was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1331,7 +1361,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the destination bucket where the copied part is being uploaded.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the copy part action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1363,7 +1393,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket where the multipart upload is taking place.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the list parts action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
@@ -1392,7 +1422,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The name of the bucket where multipart uploads are being listed.
     </ResponseField>
     <ResponseField name="timestamp" type="string">
-      The date and time when the list multipart uploads action was performed, in date-time format.
+      The date and time when the action was performed, in the ISO 8601 date-time format (yyyy-MM-ddTHH:mm:ssZ), representing UTC time.
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider, options are ['aws', 'backblaze', 'wasabi'].
