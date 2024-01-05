@@ -986,10 +986,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The version ID of the object being uploaded.
     </ResponseField>
     <ResponseField name="objectCategory" type="string (optional)">
-      The category of the object.
-    </ResponseField>
-    <ResponseField name="fileType" type="string (optional)">
-      The file type of the object.
+      The category of the object. Can be used as a file type, e.g. "JPG".
     </ResponseField>
     <ResponseField name="objectKey" type="string">
       The key of the object being uploaded.
@@ -1021,7 +1018,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
 
 <ResponseField name="PostObject" type="">
   <Expandable title="Properties">
-    <ResponseField name="action" type="'PostObject'">
+    <ResponseField name="action" type="PostObject">
       The type of action, which is 'PostObject'.
     </ResponseField>
     <ResponseField name="bytes" type="integer">
@@ -1031,10 +1028,7 @@ The S3 endpoint takes a POST request with a body of one of the thirty eight diff
       The version ID of the object being posted.
     </ResponseField>
     <ResponseField name="objectCategory" type="string (optional)">
-      The category of the object.
-    </ResponseField>
-    <ResponseField name="fileType" type="string (optional)">
-      The file type of the object.
+      The category of the object. Can be used as a file type, e.g. "JPG".
     </ResponseField>
     <ResponseField name="objectKey" type="string">
       The key of the object being posted.
