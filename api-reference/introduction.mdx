@@ -1,36 +1,34 @@
-{/_ ---
-title: 'S3'
-openapi: 'POST /s3'
---- _/}
+---
+title: "Introduction"
+---
 
-<Note>
-  This documentation is intended for users who are implementing self-serve API
-  integrations. If you're utilizing Dashdive's automated agent for data
-  collection, refer to the relevant sections of our documentation.
-</Note>
+## Overview
 
-EXMPLKEY.hj33f+ASdfasdfyhsdfg+ut82nv91dm9mamd9jfi82a/Aqjo
+Each supported cloud service, such as S3, has its own dedicated `POST` route in the API. Every route supports a set of allowed, predefined usage events. In some cases, like S3, these usage event types are given by the [API methods](https://docs.aws.amazon.com/AmazonS3/latest/API/API_Operations_Amazon_Simple_Storage_Service.html) supported by the service. In other cases, such as open-ended compute services like EC2, these usage event types are defined by Dashdive rather than the cloud provider.
 
-## Getting Started with Self-Serve APIs
+Currently, only one event can be sent per `POST` request, but an analogous batch route for each endpoint will be added soon.
 
-Before diving into the API details, ensure you're familiar with the basic concepts and setup requirements:
+## Data Type Considerations
 
-- Review the [API Setup Guide](/s3/introduction) for initial configuration steps.
+Upon schema failure, the rejected event will still be recorded to the database in raw form. This way, the schema violation can be manually corrected later, and the event can be inserted as originally intended.
 
-<Card
-  title="Dashdive API Endpoints"
-  icon="cloud"
-  href="https://staging.ingest.dashdive.com/openapi.json"
->
-  Access the complete OpenAPI specification
-</Card>
+- **Timestamps.** It is recommended to pass timestamps in ISO 8601 "Extended Date and Time" format and with timezone omitted, meaning UTC is implied (e.g. `"2013-01-01T04:00:00Z"`). Dashdive will attempt to honor timezone annotations (e.g. `+08:00`) if present.
+- **Required vs. optional fields.** All fields are required unless explicitly marked as optional. If a required field is missing, schema validation will fail and the event will be rejected.
+- **Permissive with extraneous fields.** If unexpected fields (e.g. `{ "unknown_foo": "bar" }`) are included, the event will still be accepted, and the unexpected fields are simply ignored. Note that the data in those fields is permanently lost. Unlike hard schema violations where a required field is missing or malformed, validated events with extraneous fields are not recorded in their raw form.
+- **Nullability.** An explicit `null` can always be passed for optional fields.
+
+## OpenAPI Specification
+
+The most up-to-date OpenAPI spec is always available at: https://ingest.dashdive.com/openapi.json.
 
 ## Authentication
 
-To ensure secure access to our APIs, authentication is mandatory for all endpoints. Use your Dashdive API key as follows:
+API key based authentication is required for all endpoints. Use your Dashdive API key as follows:
 
 ```json
 "header": {
   "X-API-Key": "<YOUR_DASHDIVE_API_KEY>"
 }
 ```
+
+Valid API keys have the format: `<8_char_readable_prefix>.<48_char_base64_payload>`. For example: `EXMPLKEY.SGVsbG8gd29ybGQgZnJvbSBEYXNoZGl2ZSEgKGJhc2U2NCk=`.

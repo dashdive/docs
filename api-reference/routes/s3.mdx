@@ -1,0 +1,1487 @@
+---
+title: "S3: Usage Events"
+sidebarTitle: "S3"
+api: "POST /s3"
+---
+
+<RequestExample>
+
+```shell cURL
+curl --request POST \
+  --url https://ingest.dashdive.com/s3 \
+  --header 'Content-Type: application/json' \
+  --header 'X-API-Key: <x-api-key>' \
+  --data '{
+  "action": "ListBuckets",
+  "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
+  "provider": "aws",
+  "customerId": "string",
+  "featureId": "string",
+  "clientType": "string",
+  "clientId": "string"
+}'
+```
+
+```java Java
+HttpResponse<String> response = Unirest.post("https://ingest.dashdive.com/s3")
+  .header("X-API-Key", "<x-api-key>")
+  .header("Content-Type", "application/json")
+  .body("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-ddTHH:mm:ssZ\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
+  .asString();
+```
+
+```python Python
+import requests
+
+url = "https://ingest.dashdive.com/s3"
+
+payload = {
+    "action": "ListBuckets",
+    "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
+    "provider": "aws",
+    "customerId": "string",
+    "featureId": "string",
+    "clientType": "string",
+    "clientId": "string"
+}
+headers = {
+    "X-API-Key": "<x-api-key>",
+    "Content-Type": "application/json"
+}
+
+response = requests.request("POST", url, json=payload, headers=headers)
+
+print(response.text)
+```
+
+```javascript JavaScript
+const options = {
+  method: "POST",
+  headers: { "X-API-Key": "<x-api-key>", "Content-Type": "application/json" },
+  body: '{"action":"ListBuckets","timestamp":"yyyy-MM-ddTHH:mm:ssZ","provider":"aws","customerId":"string","featureId":"string","clientType":"string","clientId":"string"}',
+};
+
+fetch("https://ingest.dashdive.com/s3", options)
+  .then((response) => response.json())
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err));
+```
+
+```go Go
+package main
+
+import (
+  "fmt"
+  "strings"
+  "net/http"
+  "io/ioutil"
+)
+
+func main() {
+
+  url := "https://ingest.dashdive.com/s3"
+
+  payload := strings.NewReader("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-ddTHH:mm:ssZ\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
+
+  req, _ := http.NewRequest("POST", url, payload)
+
+  req.Header.Add("X-API-Key", "<x-api-key>")
+  req.Header.Add("Content-Type", "application/json")
+
+  res, _ := http.DefaultClient.Do(req)
+
+  defer res.Body.Close()
+  body, _ := ioutil.ReadAll(res.Body)
+
+  fmt.Println(res)
+  fmt.Println(string(body))
+}
+```
+
+</RequestExample>
+
+<ResponseExample>
+```txt 200
+OK
+```
+```json 400
+{ "error": "Validation Error", "details": [...] }
+```
+</ResponseExample>
+
+## Required Headers
+
+| <div style={{paddingRight: 128}}>Header</div> | <div style={{paddingRight: 128}}>Value</div> |
+| --------------------------------------------- | -------------------------------------------- |
+| Content-Type                                  | application/json                             |
+| X-API-Key                                     | \<x-api-key\>                                |
+
+## Body Content
+
+Like all ingestion endpoints, the S3 endpoint accepts a body containing the description of a single event. The event may be one of the event types enumerated below.
+
+Note that fractional seconds in timestamps are allowed but will be ignored, because S3 event timestamps have a maximum granularity of seconds (see [docs](https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html#API_GetObject_Examples)). This applies in addition to the timestamp guidelines specified [here](/api-reference/introduction#data-type-considerations).
+
+### "Object Modification" Event Types
+
+<ResponseField name="GetObject" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetObject'">
+      The event type, which in this case is 'GetObject'.
+    </ResponseField>
+    <ResponseField name="bytes" type="integer">
+      The size of the object in bytes.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the downloaded object, if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the downloaded object.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="PutObject" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'PutObject'">
+      The event type, which in this case is 'PutObject'.
+    </ResponseField>
+    <ResponseField name="bytes" type="integer">
+      The size of the object in bytes.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the uploaded object, if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="objectCategory" type="string (optional)">
+      The category of the object. Can be used as a file type, e.g. "JPG".
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the uploaded object.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket into which the object was uploaded.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="PostObject" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="PostObject">
+      The event type, which in this case is 'PostObject'.
+    </ResponseField>
+    <ResponseField name="bytes" type="integer">
+      The size of the object in bytes.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the uploaded object, if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="objectCategory" type="string (optional)">
+      The category of the object. Can be used as a file type, e.g. "JPG".
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the uploaded object.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket into which the object was uploaded.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="CopyObject" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'CopyObject'">
+      The event type, which in this case is 'CopyObject'.
+    </ResponseField>
+    <ResponseField name="copySource" type="object">
+      Fields describing the source (copied) object.
+      <Expandable title="properties">
+        <ResponseField name="bucket" type="string">
+          The name of the source bucket of the copied object.
+        </ResponseField>
+        <ResponseField name="objectKey" type="string">
+          The key of the copied (source) object.
+        </ResponseField>
+        <ResponseField name="versionId" type="string (optional)">
+          The version ID of the source object, if versioning is enabled.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the destination bucket.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the destination object.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the destination object, if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="DeleteObject" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'DeleteObject'">
+      The event type, which in this case is 'DeleteObject'.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the deleted object, if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="isDeleteMarker" type="boolean (optional)">
+      Indicates whether the deletion is a delete marker.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the deleted object.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the deleted object.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="DeleteObjects" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'DeleteObjects'">
+      The event type, which in this case is 'DeleteObjects'.
+    </ResponseField>
+    <ResponseField name="deletedObjects" type="object[]">
+      An array of entries: one for each object which was deleted.
+      <Expandable title="properties">
+        <ResponseField name="objectKey" type="string">
+          The key of the deleted object.
+        </ResponseField>
+        <ResponseField name="versionId" type="string (optional)">
+          The version ID of the deleted object, if versioning is enabled.
+        </ResponseField>
+        <ResponseField name="isDeleteMarker" type="boolean (optional)">
+          Indicates whether the deletion is a delete marker.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket from which the objects were deleted.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### "Multipart Upload" Event Types
+
+<ResponseField name="CreateMultipartUpload" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'CreateMultipartUpload'">
+      The event type, which in this case is 'CreateMultipartUpload'.
+    </ResponseField>
+    <ResponseField name="uploadId" type="string">
+      The unique identifier for the multipart upload.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the object being uploaded in parts.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket to which the object was uploaded.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the multipart upload.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the multipart
+      upload.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="CompleteMultipartUpload" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'CompleteMultipartUpload'">
+      The event type, which in this case is 'CompleteMultipartUpload'.
+    </ResponseField>
+    <ResponseField name="uploadId" type="string">
+      The unique identifier for the completed multipart upload.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the uploaded object.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the uploaded object, if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket to which the multipart upload was made.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that completed the multipart upload.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that completed the multipart
+      upload.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="AbortMultipartUpload" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'AbortMultipartUpload'">
+      The event type, which in this case is 'AbortMultipartUpload'.
+    </ResponseField>
+    <ResponseField name="uploadId" type="string ">
+      The unique identifier for the aborted multipart upload.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket where the multipart upload was taking place.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the multipart
+      upload.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature related to the multipart upload.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the abort action.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the abort
+      action.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="UploadPart" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'UploadPart'">
+      The event type, which in this case is 'UploadPart'.
+    </ResponseField>
+    <ResponseField name="uploadId" type="string">
+      The unique identifier for the multipart upload session.
+    </ResponseField>
+    <ResponseField name="bytes" type="integer">
+      The size of the uploaded part in bytes.
+    </ResponseField>
+    <ResponseField name="partNumber" type="integer">
+      The part number of the uploaded part.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket where the part was uploaded.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the upload.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature related to the upload.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the upload part.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the upload
+      part.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="UploadPartCopy" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'UploadPartCopy'">
+      The event type, which in this case is 'UploadPartCopy'.
+    </ResponseField>
+    <ResponseField name="uploadId" type="string">
+      The unique identifier for the multipart upload session in which the part
+      was copied.
+    </ResponseField>
+    <ResponseField name="bytes" type="integer">
+      The size of the copied part in bytes.
+    </ResponseField>
+    <ResponseField name="partNumber" type="integer">
+      The part number of the uploaded copy.
+    </ResponseField>
+    <ResponseField name="copySource" type="object">
+      Fields describing the source (copied) object.
+      <Expandable title="properties">
+        <ResponseField name="bucket" type="string">
+          The name of the source bucket of the copied object.
+        </ResponseField>
+        <ResponseField name="objectKey" type="string">
+          The key of the copied (source) object.
+        </ResponseField>
+        <ResponseField name="versionId" type="string (optional)">
+          The version ID of the source object, if versioning is enabled.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the destination bucket where the copied part was uploaded.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the upload.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature related to the upload.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the upload part copy.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the upload
+      part copy.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="ListParts" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'ListParts'">
+      The event type, which in this case is 'ListParts'.
+    </ResponseField>
+    <ResponseField name="uploadId" type="string">
+      The unique identifier for the multipart upload session whose parts were
+      listed.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket where the multipart upload is taking place.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the listing.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature related to the multipart upload.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the list parts action.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the list
+      parts action.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="ListMultipartUploads" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'ListMultipartUploads'">
+      The event type, which in this case is 'ListMultipartUploads'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket in which multipart uploads were listed.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering listing of the
+      multipart uploads.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature related to the multipart uploads.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the list multipart uploads
+      action.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the list
+      multipart uploads action.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### "Global" Event Types
+
+<ResponseField name="ListBuckets" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'ListBuckets'">
+      The event type, which in this case is 'ListBuckets'.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### "Per-Bucket" Event Types
+
+<ResponseField name="DeleteBucket" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'DeleteBucket'">
+      The event type, which in this case is 'DeleteBucket'.
+    </ResponseField>
+    <ResponseField name="force" type="boolean (optional)">
+      A boolean indicating whether the deletion was be forced. (This applies to
+      Wasabi only and means that all extant objects in the bucket will be
+      forcibly removed first. For other providers, buckets can only be deleted
+      when they contain no objects.)
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket to be deleted.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="HeadBucket" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'HeadBucket'">
+      The event type, which in this case is 'HeadBucket'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket to be accessed.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="CreateBucket" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'CreateBucket'">
+      The event type, which in this case is 'CreateBucket'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket to be created.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="GetBucketAcl" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetBucketAcl'">
+      The event type, which in this case is 'GetBucketAcl'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the ACL (Access Control List) was
+      retrieved.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="GetBucketCors" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetBucketCors'">
+      The event type, which in this case is 'GetBucketCors'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the CORS (Cross-Origin Resource Sharing)
+      configuration was retrieved.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="GetBucketEncryption" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetBucketEncryption'">
+      The event type, which in this case is 'GetBucketEncryption'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the encryption settings are being
+      retrieved.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="GetBucketLocation" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetBucketLocation'">
+      The event type, which in this case is 'GetBucketLocation'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the location information was retrieved.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="GetBucketVersioning" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetBucketVersioning'">
+      The event type, which in this case is 'GetBucketVersioning'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the versioning information was retrieved.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="PutBucketAcl" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'PutBucketAcl'">
+      The event type, which in this case is 'PutBucketAcl'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the ACL (Access Control List) was set.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="PutBucketCors" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'PutBucketCors'">
+      The event type, which in this case is 'PutBucketCors'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the CORS (Cross-Origin Resource Sharing)
+      settings were set.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="PutBucketEncryption" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'PutBucketEncryption'">
+      The event type, which in this case is 'PutBucketEncryption'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the encryption settings were set.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="DeleteBucketCors" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'DeleteBucketCors'">
+      The event type, which in this case is 'DeleteBucketCors'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the CORS (Cross-Origin Resource Sharing)
+      settings were deleted.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="DeleteBucketEncryption" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'DeleteBucketEncryption'">
+      The event type, which in this case is 'DeleteBucketEncryption'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the encryption settings are being
+      deleted.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="GetObjectLockConfiguration" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetObjectLockConfiguration'">
+      The event type, which in this case is 'GetObjectLockConfiguration'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the object lock configuration was
+      retrieved.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="PutObjectLockConfiguration" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'PutObjectLockConfiguration'">
+      The event type, which in this case is 'PutObjectLockConfiguration'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which the object lock configuration was set.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="ListObjectsV2" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'ListObjectsV2'">
+      The event type, which in this case is 'ListObjectsV2'.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket for which objects were listed.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+### "Simple Per-Object" Event Types
+
+<ResponseField name="HeadObject" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'HeadObject'">
+      The event type, which in this case is 'HeadObject'.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the accessed object.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket in which the object is stored.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="ListObjectVersions" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'ListObjectVersions'">
+      The event type, which in this case is 'ListObjectVersions'.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the object for which versions were listed.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="GetObjectAcl" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetObjectAcl'">
+      The event type, which in this case is 'GetObjectAcl'.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the object for which the Access Control List (ACL) was
+      retrieved.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="PutObjectAcl" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'PutObjectAcl'">
+      The event type, which in this case is 'PutObjectAcl'.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the object for which the Access Control List (ACL) was set.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="GetObjectRetention" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetObjectRetention'">
+      The event type, which in this case is 'GetObjectRetention'.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the object for which the retention information was retrieved.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="PutObjectRetention" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'PutObjectRetention'">
+      The event type, which in this case is 'PutObjectRetention'.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the object for which the retention policy was set.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="GetObjectLegalHold" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'GetObjectLegalHold'">
+      The event type, which in this case is 'GetObjectLegalHold'.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the object for which the legal hold status was retrieved.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="PutObjectLegalHold" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'PutObjectLegalHold'">
+      The event type, which in this case is 'PutObjectLegalHold'.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the object for which the legal hold was set.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+  </Expandable>
+</ResponseField>

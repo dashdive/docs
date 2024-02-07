@@ -6,13 +6,8 @@
     "light": "/images/logo_black_text.png"
   },
   "api": {
-    "baseUrl": "https://staging.ingest.dashdive.com",
-    "auth": {
-      "method": "key",
-      "name": "X-API-Key"
-    },
     "playground": {
-      "mode": "show"
+      "mode": "hide"
     }
   },
   "favicon": "/images/favicon.png",
@@ -52,8 +47,8 @@
       ]
     },
     {
-      "group": "API Documentation",
-      "pages": ["api-reference/introduction", "api-reference/endpoint/s3"]
+      "group": "API Reference",
+      "pages": ["api-reference/introduction", "api-reference/routes/s3"]
     }
   ],
   "footerSocials": {
