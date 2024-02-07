@@ -129,18 +129,6 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="action" type="'GetObject'">
       The event type, which in this case is 'GetObject'.
     </ResponseField>
-    <ResponseField name="bytes" type="integer">
-      The size of the object in bytes.
-    </ResponseField>
-    <ResponseField name="versionId" type="string (optional)">
-      The version ID of the downloaded object, if versioning is enabled.
-    </ResponseField>
-    <ResponseField name="objectKey" type="string">
-      The key of the downloaded object.
-    </ResponseField>
-    <ResponseField name="bucket" type="string">
-      The name of the bucket containing the object.
-    </ResponseField>
     <ResponseField name="timestamp" type="string">
       The timestamp at which the event took place, as indicated by the `Date`
       header of the S3 HTTP response. ISO 8601 UTC format without fractional
@@ -148,6 +136,18 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the downloaded object.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the downloaded object, if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="bytes" type="integer">
+      The size of the object in bytes.
     </ResponseField>
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
@@ -169,21 +169,6 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="action" type="'PutObject'">
       The event type, which in this case is 'PutObject'.
     </ResponseField>
-    <ResponseField name="bytes" type="integer">
-      The size of the object in bytes.
-    </ResponseField>
-    <ResponseField name="versionId" type="string (optional)">
-      The version ID of the uploaded object, if versioning is enabled.
-    </ResponseField>
-    <ResponseField name="objectCategory" type="string (optional)">
-      The category of the object. Can be used as a file type, e.g. "JPG".
-    </ResponseField>
-    <ResponseField name="objectKey" type="string">
-      The key of the uploaded object.
-    </ResponseField>
-    <ResponseField name="bucket" type="string">
-      The name of the bucket into which the object was uploaded.
-    </ResponseField>
     <ResponseField name="timestamp" type="string">
       The timestamp at which the event took place, as indicated by the `Date`
       header of the S3 HTTP response. ISO 8601 UTC format without fractional
@@ -191,6 +176,21 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket into which the object was uploaded.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the uploaded object.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the uploaded object, if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="bytes" type="integer">
+      The size of the object in bytes.
+    </ResponseField>
+    <ResponseField name="objectCategory" type="string (optional)">
+      The category of the object. Can be used as a file type, e.g. "JPG".
     </ResponseField>
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
@@ -212,21 +212,6 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="action" type="PostObject">
       The event type, which in this case is 'PostObject'.
     </ResponseField>
-    <ResponseField name="bytes" type="integer">
-      The size of the object in bytes.
-    </ResponseField>
-    <ResponseField name="versionId" type="string (optional)">
-      The version ID of the uploaded object, if versioning is enabled.
-    </ResponseField>
-    <ResponseField name="objectCategory" type="string (optional)">
-      The category of the object. Can be used as a file type, e.g. "JPG".
-    </ResponseField>
-    <ResponseField name="objectKey" type="string">
-      The key of the uploaded object.
-    </ResponseField>
-    <ResponseField name="bucket" type="string">
-      The name of the bucket into which the object was uploaded.
-    </ResponseField>
     <ResponseField name="timestamp" type="string">
       The timestamp at which the event took place, as indicated by the `Date`
       header of the S3 HTTP response. ISO 8601 UTC format without fractional
@@ -234,6 +219,21 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket into which the object was uploaded.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the uploaded object.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the uploaded object, if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="bytes" type="integer">
+      The size of the object in bytes.
+    </ResponseField>
+    <ResponseField name="objectCategory" type="string (optional)">
+      The category of the object. Can be used as a file type, e.g. "JPG".
     </ResponseField>
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
@@ -247,6 +247,7 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client or device that initiated the event.
     </ResponseField>
+
   </Expandable>
 </ResponseField>
 
@@ -254,6 +255,14 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
   <Expandable title="properties">
     <ResponseField name="action" type="'CopyObject'">
       The event type, which in this case is 'CopyObject'.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
     </ResponseField>
     <ResponseField name="copySource" type="object">
       Fields describing the source (copied) object.
@@ -278,14 +287,6 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="versionId" type="string (optional)">
       The version ID of the destination object, if versioning is enabled.
     </ResponseField>
-    <ResponseField name="timestamp" type="string">
-      The timestamp at which the event took place, as indicated by the `Date`
-      header of the S3 HTTP response. ISO 8601 UTC format without fractional
-      seconds is recommended.
-    </ResponseField>
-    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
-      The storage service provider.
-    </ResponseField>
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
     </ResponseField>
@@ -306,18 +307,6 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="action" type="'DeleteObject'">
       The event type, which in this case is 'DeleteObject'.
     </ResponseField>
-    <ResponseField name="versionId" type="string (optional)">
-      The version ID of the deleted object, if versioning is enabled.
-    </ResponseField>
-    <ResponseField name="isDeleteMarker" type="boolean (optional)">
-      Indicates whether the deletion is a delete marker.
-    </ResponseField>
-    <ResponseField name="objectKey" type="string">
-      The key of the deleted object.
-    </ResponseField>
-    <ResponseField name="bucket" type="string">
-      The name of the bucket containing the deleted object.
-    </ResponseField>
     <ResponseField name="timestamp" type="string">
       The timestamp at which the event took place, as indicated by the `Date`
       header of the S3 HTTP response. ISO 8601 UTC format without fractional
@@ -325,6 +314,25 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the deleted object.
+    </ResponseField>
+    <ResponseField name="objectKey" type="string">
+      The key of the deleted object.
+    </ResponseField>
+    <ResponseField
+      name="resultingDeleteMarkerVersionId"
+      type="string (optional)"
+    >
+      The version ID of the delete marker that was created in the case that this
+      was a "soft delete" (i.e., the underlying object version was not actually
+      removed). Only applies if versioning is enabled.
+    </ResponseField>
+    <ResponseField name="hardDeletedVersionId" type="string (optional)">
+      The version ID of the "hard deleted" object that was truly removed from
+      the bucket. The version ID may refer to an object with meaningful content,
+      or it may refer to a delete marker. Only applies if versioning is enabled.
     </ResponseField>
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
@@ -346,23 +354,6 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="action" type="'DeleteObjects'">
       The event type, which in this case is 'DeleteObjects'.
     </ResponseField>
-    <ResponseField name="deletedObjects" type="object[]">
-      An array of entries: one for each object which was deleted.
-      <Expandable title="properties">
-        <ResponseField name="objectKey" type="string">
-          The key of the deleted object.
-        </ResponseField>
-        <ResponseField name="versionId" type="string (optional)">
-          The version ID of the deleted object, if versioning is enabled.
-        </ResponseField>
-        <ResponseField name="isDeleteMarker" type="boolean (optional)">
-          Indicates whether the deletion is a delete marker.
-        </ResponseField>
-      </Expandable>
-    </ResponseField>
-    <ResponseField name="bucket" type="string">
-      The name of the bucket from which the objects were deleted.
-    </ResponseField>
     <ResponseField name="timestamp" type="string">
       The timestamp at which the event took place, as indicated by the `Date`
       header of the S3 HTTP response. ISO 8601 UTC format without fractional
@@ -370,6 +361,31 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     </ResponseField>
     <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
       The storage service provider.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket from which the objects were deleted.
+    </ResponseField>
+    <ResponseField name="deletedObjects" type="object[]">
+      An array of entries: one for each object which was deleted.
+      <Expandable title="properties">
+        <ResponseField name="objectKey" type="string">
+          The key of the deleted object.
+        </ResponseField>
+        <ResponseField
+          name="resultingDeleteMarkerVersionId"
+          type="string (optional)"
+        >
+          The version ID of the delete marker that was created in the case that
+          this was a "soft delete" (i.e., the underlying object version was not
+          actually removed). Only applies if versioning is enabled.
+        </ResponseField>
+        <ResponseField name="hardDeletedVersionId" type="string (optional)">
+          The version ID of the "hard deleted" object that was truly removed
+          from the bucket. The version ID may refer to an object with meaningful
+          content, or it may refer to a delete marker. Only applies if
+          versioning is enabled.
+        </ResponseField>
+      </Expandable>
     </ResponseField>
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
