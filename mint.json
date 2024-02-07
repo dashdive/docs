@@ -2,28 +2,22 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "Dashdive",
   "logo": {
-    "dark": "/logo/logo.png",
-    "light": "/logo/logo.png"
+    "dark": "/images/logo_white_text.png",
+    "light": "/images/logo_black_text.png"
   },
   "api": {
-    "baseUrl": "https://ingest.dashdive.com",
-    "auth": {
-      "method": "key",
-      "name": "X-API-Key"
-    },
     "playground": {
-      "mode": "show"
+      "mode": "hide"
     }
   },
-  "openapi": ["openapi.json"],
-  "favicon": "/favicon.png",
+  "favicon": "/images/favicon.png",
   "colors": {
-    "primary": "#006DC2",
-    "light": "#ecf5fd",
+    "primary": "#006dc2",
+    "light": "#b5dcff",
     "dark": "#064c86",
     "anchors": {
-      "from": "#006DC2",
-      "to": "#4896D4"
+      "from": "#006dc2",
+      "to": "#4896d4"
     }
   },
   "topbarLinks": [
@@ -36,41 +30,25 @@
     "name": "Dashboard",
     "url": "https://app.dashdive.com"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    }
-  ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://docs.dashdive.com"
-    },
-    {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://www.dashdive.com/blog"
-    },
-    {
-      "name": "Chat with Us",
-      "icon": "phone",
-      "url": "https://calendly.com/micah-wheat/dashdive-chat?month=2023-11"
+      "name": "Get Started",
+      "icon": "play",
+      "url": "https://app.dashdive.com"
     }
   ],
   "navigation": [
     {
-      "group": "Documentation",
-      "pages": ["introduction", "how-dashdive-works", "events", "s3"]
+      "group": "Overview",
+      "pages": [
+        "overview/introduction",
+        "overview/how-dashdive-works",
+        "overview/quickstart"
+      ]
     },
     {
-      "group": "API Documentation",
-      "pages": ["api-reference/introduction"]
-    },
-    {
-      "group": "Endpoint",
-      "pages": ["api-reference/endpoint/s3"]
+      "group": "API Reference",
+      "pages": ["api-reference/introduction", "api-reference/routes/s3"]
     }
   ],
   "footerSocials": {

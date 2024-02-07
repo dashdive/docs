@@ -1,0 +1,66 @@
+---
+title: How Dashdive Works
+---
+
+Dashdive has three key components: (1) event collection, (2) event ingestion, and (3) analytical queries on ingested events.
+
+<img className="block w-full dark:hidden" src="/images/diagram_light.png" />
+<img className="hidden w-full dark:block" src="/images/diagram_dark.png" />
+
+## 1. Event Collection
+
+Each individual event must be tagged by relevant attributes, such as associated feature (`feature_id`) and originating customer (`customer_id`). We also support custom attributes; please [contact us](mailto:team@dashdive.com) to enable this.
+
+**Extracting attributes.** When using the agent, you can write small attribute extractor functions to pick out attributes from available context. For example, you might deduce the `customer_id` from the API key on an inbound HTTP request. When sending events directly, you must extract attributes manually in your code.
+
+**Sending events.** There are two options for collecting events:
+
+      - Collect your cloud usage events manually and send them to our ingestion endpoint directly, either via custom code (see the [API reference](/api-reference/introduction)) or via our [SDKs](https://github.com/dashdive/fern/tree/main/generated).
+      - Install our agent to collect and tag events automatically in the background. To access builds of the agent, please [reach out](mailto:team@dashdive.com).
+
+## 2. Event Ingestion
+
+Our top priority is data completeness and correctness. This necessitates **no dropped events** (high availability) and **no duplicates** (exactly-once semantics).
+
+- **High availability**. All components in our ingestion pipeline, including the API server nodes, Kafka brokers, and ClickHouse databases are replicated for high availability and redundancy.
+- **Exactly-once semantics**. Exactly-once semantics are hard. Thankfully, we can use the exactly-one semantics already implemented in [Kafka](https://www.confluent.io/blog/exactly-once-semantics-are-possible-heres-how-apache-kafka-does-it/) and the [Kafka ClickHouse connector](https://clickhouse.com/blog/kafka-connect-connector-clickhouse-with-exactly-once#high-level-design) to ensure the same is true of our entire pipeline.
+
+Additionally, while the schema for ingested events is strictly enforced to ensure well-structured data, malformed events aren't simply discarded. The schema is permissive, meaning that extraneous fields are ignored rather than rejected. Also, any truly malformed events -- with required fields missing or having incorrect data types -- are recorded in raw form in the database. This way, although the events were rejected on first receipt, they can be manually reviewed and corrected later.
+
+## 3. Analytical Queries on Ingested Events
+
+You can use the graphical interface in the Dashdive [web app](https://app.dashdive.com) to answer queries about the ingested events. Unlike other cloud products, since we collect individual events, you can break down by ultra-high-cardinality fields such as `device_id`, `request_id`, and `object_key`.
+
+The dashboard is intended to be real-time and interactive, in contrast to some data warehouses that take minutes or more to execute a single query. In most cases, Dashdive achieves sub-second query times by pre-aggregating raw events into optimized tables and choosing the right table intelligently per-query. The result is a query latency of \<1 second even on \>100 billion raw events, in many cases. You can see this in action with medium-scale data in our [demo](https://demo.dashdive.com).
+
+# Frequently Asked Questions
+
+<AccordionGroup>
+    <Accordion title="Which cloud services are supported?" icon="cloud">
+    Currently Dashdive only supports AWS S3 and S3-compatible providers such as Backblaze and Wasabi. Azure Blob Storage and GCP Cloud Storage can be easily added.
+
+    We are working to add support for compute services, including baremetal offerings (AWS EC2, GCP VMs) and containerized offerings (EKS, ECS, Fargate, Cloud Run).
+
+    If you would like to see a specific service supported, please [reach out](mailto:founders@dashdive.com).
+    </Accordion>
+
+    <Accordion
+    title="Are there throughput limits on the number of events per second?"
+    icon="gauge-high"
+    >
+    By default, each customer's infrastructure is configured to handle 20,000
+    events per second at peak load. However, additional replicas can easily be
+    provisioned to handle orders of magnitude more throughput.
+    </Accordion>
+
+  <Accordion title="Do you offer a self-hosted version?" icon="lock">
+    We do.
+
+    Due to the complexity of the infrastructure required to reliably handle event ingestion at scale, this requires custom onboarding with our team.
+
+  </Accordion>
+
+  <Accordion title="Can I export the raw data and analyze it any way I want?" icon="chart-mixed">
+    Yes. You can export raw CSV or Parquet data directly from our web dashboard. In cases where the raw data size is too large to download via the browser (e.g. terabytes or petabytes), we can manually export the data from ClickHouse directly to the computer of your choice.
+  </Accordion>
+</AccordionGroup>

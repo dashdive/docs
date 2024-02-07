@@ -1,0 +1,18 @@
+---
+title: Introduction
+description: "Get application performance monitoring (APM) level visibility into your costs"
+---
+
+## Just another cloud cost product?
+
+Let's say you serve a few hundred customers using the same cloud infrastructure. For example, you might have one large, shared Postgres database and a Kubernetes cluster containing many replica pods, each of which runs your application. How would you go about answering questions like the following:
+
+> "Are a few customers responsible for a disproportionate share of my costs?"
+
+> "Last month, I added a computationally-intensive new feature, but I also had an unrelated increase in application traffic. My costs went up. How do I determine what proportion of the cost increase is due to the new feature and what proportion is due to the traffic uptick?"
+
+**Dashdive is built to answer questions like these.** As a result, it works differently from most other cloud cost analysis products.
+
+Most products display the cost and usage data that has _already been collected_ by the cloud provider themselves. For example, such products often draw from AWS's [cost and usage reports](https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html). This data is collected at the resource level (e.g., EC2 instance X cost $Y last month), which doesn't help with **sub-resource** insights. By contrast, Dashdive collects individual usage events -- such as database inserts, HTTP requests, or object downloads -- and tags each event with attributes like originating customer, associated feature, and responsible team.
+
+This enables accurate cost accounting and chargebacks in multitenant setups. Even if multiple features, customers, or teams share the same cloud resource (S3 bucket, RDS instance, etc.), you can still see exactly how much usage was incurred by each individual feature, customer, or team.
