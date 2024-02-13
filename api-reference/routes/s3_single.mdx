@@ -1,8 +1,12 @@
 ---
-title: "S3: Usage Events"
-sidebarTitle: "S3"
+title: "S3: Single Usage Event"
+sidebarTitle: "/s3"
 api: "POST /s3"
 ---
+
+<Info>
+  <b>Supported Aliases:</b> `/s3/single`
+</Info>
 
 <RequestExample>
 
@@ -12,30 +16,6 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --header 'X-API-Key: <x-api-key>' \
   --data '{
-  "action": "ListBuckets",
-  "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
-  "provider": "aws",
-  "customerId": "string",
-  "featureId": "string",
-  "clientType": "string",
-  "clientId": "string"
-}'
-```
-
-```java Java
-HttpResponse<String> response = Unirest.post("https://ingest.dashdive.com/s3")
-  .header("X-API-Key", "<x-api-key>")
-  .header("Content-Type", "application/json")
-  .body("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-ddTHH:mm:ssZ\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
-  .asString();
-```
-
-```python Python
-import requests
-
-url = "https://ingest.dashdive.com/s3"
-
-payload = {
     "action": "ListBuckets",
     "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
     "provider": "aws",
@@ -43,13 +23,49 @@ payload = {
     "featureId": "string",
     "clientType": "string",
     "clientId": "string"
+  }'
+```
+
+```java Java
+String url = "https://ingest.dashdive.com/s3";
+Map<String, String> payloadMap = new HashMap<>();
+payloadMap.put("action", "ListBuckets");
+payloadMap.put("timestamp", "yyyy-MM-ddTHH:mm:ssZ");
+payloadMap.put("provider", "aws");
+payloadMap.put("customerId", "string");
+payloadMap.put("featureId", "string");
+payloadMap.put("clientType", "string");
+payloadMap.put("clientId", "string");
+
+ObjectMapper objectMapper = new ObjectMapper();
+String payload = objectMapper.writeValueAsString(payloadMap);
+
+HttpResponse<String> response = Unirest.post(url)
+  .header("X-API-Key", "<x-api-key>")
+  .header("Content-Type", "application/json")
+  .body(payload)
+  .asString();
+```
+
+```python Python
+url = "https://ingest.dashdive.com/s3"
+
+payload = {
+  "action": "ListBuckets",
+  "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
+  "provider": "aws",
+  "customerId": "string",
+  "featureId": "string",
+  "clientType": "string",
+  "clientId": "string"
 }
 headers = {
     "X-API-Key": "<x-api-key>",
     "Content-Type": "application/json"
 }
 
-response = requests.request("POST", url, json=payload, headers=headers)
+response = requests.request(
+  "POST", url, json=payload, headers=headers)
 
 print(response.text)
 ```
@@ -57,8 +73,19 @@ print(response.text)
 ```javascript JavaScript
 const options = {
   method: "POST",
-  headers: { "X-API-Key": "<x-api-key>", "Content-Type": "application/json" },
-  body: '{"action":"ListBuckets","timestamp":"yyyy-MM-ddTHH:mm:ssZ","provider":"aws","customerId":"string","featureId":"string","clientType":"string","clientId":"string"}',
+  headers: {
+    "X-API-Key": "<x-api-key>",
+    "Content-Type": "application/json",
+  },
+  body: {
+    action: "ListBuckets",
+    timestamp: "yyyy-MM-ddTHH:mm:ssZ",
+    provider: "aws",
+    customerId: "string",
+    featureId: "string",
+    clientType: "string",
+    clientId: "string",
+  },
 };
 
 fetch("https://ingest.dashdive.com/s3", options)
@@ -68,34 +95,30 @@ fetch("https://ingest.dashdive.com/s3", options)
 ```
 
 ```go Go
-package main
-
-import (
-  "fmt"
-  "strings"
-  "net/http"
-  "io/ioutil"
-)
-
-func main() {
-
-  url := "https://ingest.dashdive.com/s3"
-
-  payload := strings.NewReader("{\n  \"action\": \"ListBuckets\",\n  \"timestamp\": \"yyyy-MM-ddTHH:mm:ssZ\",\n  \"provider\": \"aws\",\n  \"customerId\": \"string\",\n  \"featureId\": \"string\",\n  \"clientType\": \"string\",\n  \"clientId\": \"string\"\n}")
-
-  req, _ := http.NewRequest("POST", url, payload)
-
-  req.Header.Add("X-API-Key", "<x-api-key>")
-  req.Header.Add("Content-Type", "application/json")
-
-  res, _ := http.DefaultClient.Do(req)
-
-  defer res.Body.Close()
-  body, _ := ioutil.ReadAll(res.Body)
-
-  fmt.Println(res)
-  fmt.Println(string(body))
+url := "https://ingest.dashdive.com/s3"
+payloadMap := map[string]string{
+  "action":     "ListBuckets",
+  "timestamp":  "yyyy-MM-ddTHH:mm:ssZ",
+  "provider":   "aws",
+  "customerId": "string",
+  "featureId":  "string",
+  "clientType": "string",
+  "clientId":   "string",
 }
+
+payloadBytes, _ := json.Marshal(payloadMap)
+payload := bytes.NewReader(payloadBytes)
+
+req, _ := http.NewRequest("POST", url, payload)
+req.Header.Add("X-API-Key", "<x-api-key>")
+req.Header.Add("Content-Type", "application/json")
+
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+
+fmt.Println(res)
+fmt.Println(string(body))
 ```
 
 </RequestExample>
@@ -116,7 +139,7 @@ OK
 | Content-Type                                  | application/json                             |
 | X-API-Key                                     | \<x-api-key\>                                |
 
-## Body Content
+## Request Body Content
 
 Like all ingestion endpoints, the S3 endpoint accepts a body containing the description of a single event. The event may be one of the event types enumerated below.
 

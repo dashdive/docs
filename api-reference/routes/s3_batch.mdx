@@ -1,0 +1,219 @@
+---
+title: "S3: Batch of Usage Events"
+sidebarTitle: "/s3/batch"
+api: "POST /s3/batch"
+---
+
+<RequestExample>
+
+```shell cURL
+curl --request POST \
+  --url https://ingest.dashdive.com/s3/batch \
+  --header 'Content-Type: application/json' \
+  --header 'X-API-Key: <x-api-key>' \
+  --data '[
+    {
+      "action": "ListBuckets",
+      "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
+      "provider": "aws",
+      "customerId": "string",
+      "featureId": "string",
+      "clientType": "string",
+      "clientId": "string"
+    },
+    {
+      "action": "GetObject",
+      "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
+      "provider": "aws",
+      "bucketName": "bucket",
+      "objectKey": "key",
+      "versionId": "version",
+      "bytes": 123,
+      "customerId": "string"
+    }
+  ]'
+```
+
+```java Java
+String url = "https://ingest.dashdive.com/s3/batch";
+
+List<Map<String, Object>> payloadList = new ArrayList<>();
+
+// First object
+Map<String, Object> firstObject = new HashMap<>();
+firstObject.put("action", "ListBuckets");
+firstObject.put("timestamp", "yyyy-MM-ddTHH:mm:ssZ");
+firstObject.put("provider", "aws");
+firstObject.put("customerId", "string");
+firstObject.put("featureId", "string");
+firstObject.put("clientType", "string");
+firstObject.put("clientId", "string");
+
+// Second object
+Map<String, Object> secondObject = new HashMap<>();
+secondObject.put("action", "GetObject");
+secondObject.put("timestamp", "yyyy-MM-ddTHH:mm:ssZ");
+secondObject.put("provider", "aws");
+secondObject.put("bucketName", "bucket");
+secondObject.put("objectKey", "key");
+secondObject.put("versionId", "version");
+secondObject.put("bytes", 123);
+secondObject.put("customerId", "string");
+
+payloadList.add(firstObject);
+payloadList.add(secondObject);
+
+ObjectMapper objectMapper = new ObjectMapper();
+String payload = objectMapper.writeValueAsString(payloadList);
+
+HttpResponse<String> response = Unirest.post(url)
+  .header("X-API-Key", "<x-api-key>")
+  .header("Content-Type", "application/json")
+  .body(payload)
+  .asString();
+```
+
+```python Python
+import requests
+
+url = "https://ingest.dashdive.com/s3/batch"
+
+payload = [
+  {
+    "action": "ListBuckets",
+    "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
+    "provider": "aws",
+    "customerId": "string",
+    "featureId": "string",
+    "clientType": "string",
+    "clientId": "string",
+  },
+  {
+    "action": "GetObject",
+    "timestamp": "yyyy-MM-ddTHH:mm:ssZ",
+    "provider": "aws",
+    "bucketName": "bucket",
+    "objectKey": "key",
+    "versionId": "version",
+    "bytes": 123,
+    "customerId": "string",
+  }
+]
+headers = {
+    "X-API-Key": "<x-api-key>",
+    "Content-Type": "application/json"
+}
+
+response = requests.post(
+  url, json=payload, headers=headers)
+
+print(response.text)
+```
+
+```javascript JavaScript
+const options = {
+  method: "POST",
+  headers: {
+    "X-API-Key": "<x-api-key>",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify([
+    {
+      action: "ListBuckets",
+      timestamp: "yyyy-MM-ddTHH:mm:ssZ",
+      provider: "aws",
+      customerId: "string",
+      featureId: "string",
+      clientType: "string",
+      clientId: "string",
+    },
+    {
+      action: "GetObject",
+      timestamp: "yyyy-MM-ddTHH:mm:ssZ",
+      provider: "aws",
+      bucketName: "bucket",
+      objectKey: "key",
+      versionId: "version",
+      bytes: 123,
+      customerId: "string",
+    },
+  ]),
+};
+
+fetch("https://ingest.dashdive.com/s3/batch", options)
+  .then((response) => response.json())
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err));
+```
+
+```go Go
+url := "https://ingest.dashdive.com/s3/batch"
+
+payloadArray := []map[string]interface{}{
+  {
+    "action":     "ListBuckets",
+    "timestamp":  "yyyy-MM-ddTHH:mm:ssZ",
+    "provider":   "aws",
+    "customerId": "string",
+    "featureId":  "string",
+    "clientType": "string",
+    "clientId":   "string",
+  },
+  {
+    "action":     "GetObject",
+    "timestamp":  "yyyy-MM-ddTHH:mm:ssZ",
+    "provider":   "aws",
+    "bucketName": "bucket",
+    "objectKey":  "key",
+    "versionId":  "version",
+    "bytes":      123,
+    "customerId": "string",
+  },
+}
+
+payloadBytes, _ := json.Marshal(payloadArray)
+payload := bytes.NewReader(payloadBytes)
+
+req, _ := http.NewRequest("POST", url, payload)
+req.Header.Add("X-API-Key", "<x-api-key>")
+req.Header.Add("Content-Type", "application/json")
+
+res, _ := http.DefaultClient.Do(req)
+defer res.Body.Close()
+
+body, _ := ioutil.ReadAll(res.Body)
+
+fmt.Println(res)
+fmt.Println(string(body))
+```
+
+</RequestExample>
+
+<ResponseExample>
+```txt 200
+OK
+```
+```json 400
+{ "error": "Validation Error", "details": [...] }
+```
+</ResponseExample>
+
+## Required Headers
+
+| <div style={{paddingRight: 128}}>Header</div> | <div style={{paddingRight: 128}}>Value</div> |
+| --------------------------------------------- | -------------------------------------------- |
+| Content-Type                                  | application/json                             |
+| X-API-Key                                     | \<x-api-key\>                                |
+
+## Request Body Content
+
+This endpoint is the batch analog to the `/s3` [endpoint](/api-reference/routes/s3_single). While the
+`/s3` endpoint only supports ingesting a single event per request, this endpoint supports ingesting
+an arbitrarily large number of events in a single request.
+
+The request payload must be an array where every entry is a valid usage event, as detailed in the `/s3` endpoint [docs page](/api-reference/routes/s3_single).
+If even a single one of the events in the array is malformed, the entire request will be rejected with a `400` error.
+This means that even the well-constructed events within the payload will not be ingested.
+
+Note that in the event of a rejection, the payload is still saved to the database in raw form and can be corrected
+manually later, as detailed [here](/api-reference/introduction#data-type-considerations).
