@@ -1,0 +1,79 @@
+---
+title: "S3: Recommended Batch Size"
+sidebarTitle: "/s3/recommendedBatchSize"
+api: "GET /s3/recommendedBatchSize"
+---
+
+<RequestExample>
+
+```shell cURL
+curl --request GET \
+  --url https://ingest.dashdive.com/s3/recommendedBatchSize \
+  --header 'X-API-Key: <x-api-key>'
+```
+
+```java Java
+HttpResponse<String> response = Unirest.get(
+    "https://ingest.dashdive.com/s3/recommendedBatchSize")
+  .header("X-API-Key", "<x-api-key>")
+  .asString();
+```
+
+```python Python
+url = "https://ingest.dashdive.com/s3/recommendedBatchSize"
+headers = { "X-API-Key": "<x-api-key>" }
+response = requests.request("GET", url, headers=headers)
+
+print(response.text)
+```
+
+```javascript JavaScript
+const options = {
+  method: "GET",
+  headers: { "X-API-Key": "<x-api-key>" },
+};
+
+fetch("https://ingest.dashdive.com/s3/recommendedBatchSize", options)
+  .then((response) => response.json())
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err));
+```
+
+```go Go
+url := "https://ingest.dashdive.com/s3/recommendedBatchSize"
+
+req, _ := http.NewRequest("GET", url)
+
+req.Header.Add("X-API-Key", "<x-api-key>")
+
+res, _ := http.DefaultClient.Do(req)
+
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+
+fmt.Println(res)
+fmt.Println(string(body))
+```
+
+</RequestExample>
+
+<ResponseExample>
+```txt 200
+{"recommendedBatchSize": 100}
+```
+</ResponseExample>
+
+## Required Headers
+
+| <div style={{paddingRight: 128}}>Header</div> | <div style={{paddingRight: 128}}>Value</div> |
+| --------------------------------------------- | -------------------------------------------- |
+| X-API-Key                                     | \<x-api-key\>                                |
+
+## Response Body Content
+
+This endpoint returns the batch size recommended by Dashdive's backend when running a `POST` against the
+`/s3/batch` [endpoint](/api-reference/routes/s3_single). The exact value returned is guaranteed to be a positive integer
+less than 10,000,000. The value may update without warning between consecutive calls.
+
+Note that any batch size greater than or equal to 1 is permitted by `/s3/batch`. The returned value is simply an estimate of the ideal
+size to minimize load on Dashdive's backend and reduce network bandwith out of your infrastructure.
