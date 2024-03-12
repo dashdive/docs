@@ -172,6 +172,14 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="bytes" type="integer">
       The size of the object in bytes.
     </ResponseField>
+    <ResponseField name="isBillableEgress" type="boolean (optional)">
+      Whether this `GetObject` event resulted in outflow of data that meets the
+      conditions to be charged by the provider. Under certain conditions, such
+      as the use of CDNs or [same-region
+      instances](https://docs.aws.amazon.com/whitepapers/latest/how-aws-pricing-works/amazon-simple-storage-service-amazon-s3.html#estimating-amazon-s3-storage-costs),
+      the data downloaded is not be billed. Note that the event incurs API call
+      charges regardless. If this field is left empty, it defaults to `true`.
+    </ResponseField>
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
     </ResponseField>
