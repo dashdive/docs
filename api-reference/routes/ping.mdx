@@ -1,0 +1,75 @@
+---
+title: "Ping"
+sidebarTitle: "/ping"
+api: "GET /ping"
+---
+
+<RequestExample>
+
+```shell cURL
+curl --request GET \
+  --url https://ingest.dashdive.com/ping \
+  --header 'X-API-Key: <x-api-key>'
+```
+
+```java Java
+HttpResponse<String> response = Unirest.get(
+    "https://ingest.dashdive.com/ping")
+  .header("X-API-Key", "<x-api-key>")
+  .asString();
+```
+
+```python Python
+url = "https://ingest.dashdive.com/ping"
+headers = { "X-API-Key": "<x-api-key>" }
+response = requests.request("GET", url, headers=headers)
+
+print(response.text)
+```
+
+```javascript JavaScript
+const options = {
+  method: "GET",
+  headers: { "X-API-Key": "<x-api-key>" },
+};
+
+fetch("https://ingest.dashdive.com/ping", options)
+  .then((response) => response.json())
+  .then((response) => console.log(response))
+  .catch((err) => console.error(err));
+```
+
+```go Go
+url := "https://ingest.dashdive.com/ping"
+
+req, _ := http.NewRequest("GET", url)
+
+req.Header.Add("X-API-Key", "<x-api-key>")
+
+res, _ := http.DefaultClient.Do(req)
+
+defer res.Body.Close()
+body, _ := ioutil.ReadAll(res.Body)
+
+fmt.Println(res)
+fmt.Println(string(body))
+```
+
+</RequestExample>
+
+<ResponseExample>
+```txt 200
+"PONG"
+```
+</ResponseExample>
+
+## Required Headers
+
+| <div style={{paddingRight: 128}}>Header</div> | <div style={{paddingRight: 128}}>Value</div> |
+| --------------------------------------------- | -------------------------------------------- |
+| X-API-Key                                     | \<x-api-key\>                                |
+
+This endpoint can be used to ensure that:
+1. The Dashdive backend is currently running
+2. The Dashdive backend is reachable from the caller
+3. The supplied API key is valid

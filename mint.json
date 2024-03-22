@@ -50,6 +50,7 @@
       "group": "API Reference",
       "pages": [
         "api-reference/introduction",
+        "api-reference/routes/ping",
         "api-reference/routes/s3_single",
         "api-reference/routes/s3_batch",
         "api-reference/routes/s3_recommended_batch_size"
