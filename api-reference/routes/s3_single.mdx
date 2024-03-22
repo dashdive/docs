@@ -633,9 +633,6 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="partNumber" type="integer">
       The part number of the uploaded copy.
     </ResponseField>
-    <ResponseField name="bytes" type="integer">
-      The size of the copied part in bytes.
-    </ResponseField>
 
     <ResponseField name="copySource" type="object">
       Fields describing the source (copied) object.
@@ -1319,6 +1316,39 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
   </Expandable>
 </ResponseField>
 
+<ResponseField name="ListObjectVersions" type="">
+  <Expandable title="properties">
+    <ResponseField name="action" type="'ListObjectVersions'">
+      The event type, which in this case is 'ListObjectVersions'.
+    </ResponseField>
+    <ResponseField name="timestamp" type="string">
+      The timestamp at which the event took place, as indicated by the `Date`
+      header of the S3 HTTP response. ISO 8601 UTC format without fractional
+      seconds is recommended.
+    </ResponseField>
+    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
+      The storage service provider.
+    </ResponseField>
+    <ResponseField name="bucket" type="string">
+      The name of the bucket containing the object.
+    </ResponseField>
+
+    <ResponseField name="customerId" type="string (optional)">
+      The identifier of the customer responsible for triggering the event.
+    </ResponseField>
+    <ResponseField name="featureId" type="string (optional)">
+      The identifier of the feature involved in the event.
+    </ResponseField>
+    <ResponseField name="clientType" type="string (optional)">
+      The type of client or device that initiated the event.
+    </ResponseField>
+    <ResponseField name="clientId" type="string (optional)">
+      The unique identifier of the client or device that initiated the event.
+    </ResponseField>
+
+  </Expandable>
+</ResponseField>
+
 ### "Simple Per-Object" Event Types
 
 <ResponseField name="HeadObject" type="">
@@ -1340,41 +1370,8 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="objectKey" type="string">
       The key of the accessed object.
     </ResponseField>
-
-    <ResponseField name="customerId" type="string (optional)">
-      The identifier of the customer responsible for triggering the event.
-    </ResponseField>
-    <ResponseField name="featureId" type="string (optional)">
-      The identifier of the feature involved in the event.
-    </ResponseField>
-    <ResponseField name="clientType" type="string (optional)">
-      The type of client or device that initiated the event.
-    </ResponseField>
-    <ResponseField name="clientId" type="string (optional)">
-      The unique identifier of the client or device that initiated the event.
-    </ResponseField>
-
-  </Expandable>
-</ResponseField>
-
-<ResponseField name="ListObjectVersions" type="">
-  <Expandable title="properties">
-    <ResponseField name="action" type="'ListObjectVersions'">
-      The event type, which in this case is 'ListObjectVersions'.
-    </ResponseField>
-    <ResponseField name="timestamp" type="string">
-      The timestamp at which the event took place, as indicated by the `Date`
-      header of the S3 HTTP response. ISO 8601 UTC format without fractional
-      seconds is recommended.
-    </ResponseField>
-    <ResponseField name="provider" type="['aws', 'backblaze', 'wasabi']">
-      The storage service provider.
-    </ResponseField>
-    <ResponseField name="bucket" type="string">
-      The name of the bucket containing the object.
-    </ResponseField>
-    <ResponseField name="objectKey" type="string">
-      The key of the object for which versions were listed.
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the accessed object, if versioning is enabled.
     </ResponseField>
 
     <ResponseField name="customerId" type="string (optional)">
@@ -1413,6 +1410,9 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
       The key of the object for which the Access Control List (ACL) was
       retrieved.
     </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the object, if versioning is enabled.
+    </ResponseField>
 
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
@@ -1448,6 +1448,9 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     </ResponseField>
     <ResponseField name="objectKey" type="string">
       The key of the object for which the Access Control List (ACL) was set.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the object, if versioning is enabled.
     </ResponseField>
 
     <ResponseField name="customerId" type="string (optional)">
@@ -1485,6 +1488,9 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="objectKey" type="string">
       The key of the object for which the retention information was retrieved.
     </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the object, if versioning is enabled.
+    </ResponseField>
 
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
@@ -1520,6 +1526,9 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     </ResponseField>
     <ResponseField name="objectKey" type="string">
       The key of the object for which the retention policy was set.
+    </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the object, if versioning is enabled.
     </ResponseField>
 
     <ResponseField name="customerId" type="string (optional)">
@@ -1557,6 +1566,9 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="objectKey" type="string">
       The key of the object for which the legal hold status was retrieved.
     </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the object, if versioning is enabled.
+    </ResponseField>
 
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
@@ -1593,6 +1605,9 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="objectKey" type="string">
       The key of the object for which the legal hold was set.
     </ResponseField>
+    <ResponseField name="versionId" type="string (optional)">
+      The version ID of the object, if versioning is enabled.
+    </ResponseField>
 
     <ResponseField name="customerId" type="string (optional)">
       The identifier of the customer responsible for triggering the event.
@@ -1606,5 +1621,6 @@ Note that fractional seconds in timestamps are allowed but will be ignored, beca
     <ResponseField name="clientId" type="string (optional)">
       The unique identifier of the client or device that initiated the event.
     </ResponseField>
+
   </Expandable>
 </ResponseField>
